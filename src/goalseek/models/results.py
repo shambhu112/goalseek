@@ -53,5 +53,14 @@ class ResultRecord(BaseModel):
     rollback_commit_hash: str | None = None
     notes: str | None = None
     result_discussion: str | None = None
+    hypothesis_summary: str | None = None
     metric_value: float | None = None
     changed_loc: int | None = None
+
+
+class HistoryRecord(BaseModel):
+    iteration: int
+    run_dir: str
+    hypothesis_summary: str
+    iteration_score: float | None = None
+    iteration_result: str

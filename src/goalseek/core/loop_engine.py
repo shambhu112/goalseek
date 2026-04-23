@@ -81,11 +81,13 @@ class LoopEngine:
                     verification_exit_code=verification.exit_code,
                     verification_command_names=[item.name for item in verification.command_results],
                     notes=notes,
+                    hypothesis_summary="Baseline",
                     metric_value=None,
                     changed_loc=0,
                 )
                 artifacts.write_json(run_dir, "result.json", record.model_dump(mode="python"))
                 artifacts.append_result(record.model_dump(mode="python"))
+                artifacts.refresh_latest_history()
                 raise VerificationError(notes) from exc
             artifacts.write_json(run_dir, "metrics.json", metric.model_dump(mode="python"))
         else:
@@ -101,11 +103,13 @@ class LoopEngine:
             verification_exit_code=verification.exit_code,
             verification_command_names=[item.name for item in verification.command_results],
             notes=notes,
+            hypothesis_summary="Baseline",
             metric_value=metric.value if metric else None,
             changed_loc=0,
         )
         artifacts.write_json(run_dir, "result.json", record.model_dump(mode="python"))
         artifacts.append_result(record.model_dump(mode="python"))
+        artifacts.refresh_latest_history()
         if verification.exit_code != 0:
             logger.warning("Baseline verification failed for %s with exit_code=%s", root, verification.exit_code)
             raise VerificationError(notes or f"baseline verification failed; see {run_dir / 'verifier.log'}")
@@ -508,11 +512,13 @@ class LoopEngine:
             rollback_commit_hash=state.iteration_data.rollback_commit_hash,
             notes=state.iteration_data.notes,
             result_discussion="results_discussion.md",
+            hypothesis_summary=self._build_hypothesis_summary(state),
             metric_value=state.iteration_data.metric_value,
             changed_loc=state.iteration_data.changed_loc,
         )
         artifacts.write_json(run_dir, "result.json", record.model_dump(mode="python"))
         artifacts.append_result(record.model_dump(mode="python"))
+        artifacts.refresh_latest_history()
         state.last_outcome = record.outcome
         state.pending_commit = None
         state.rollback_state = "needed" if state.iteration_data.rollback_commit_hash else "not_needed"
@@ -530,6 +536,15 @@ class LoopEngine:
             f"Metric: `{state.iteration_data.metric_value}`\n\n"
             f"Notes: {state.iteration_data.notes or 'No additional notes.'}\n"
         )
+
+    def _build_hypothesis_summary(self, state: LoopState) -> str:
+        if state.iteration_data.plan_title:
+            return state.iteration_data.plan_title
+        if state.iteration_data.plan_text:
+            title = _extract_markdown_title(state.iteration_data.plan_text)
+            if title:
+                return title
+        return f"Iteration {state.current_iteration}"
 
     def _snapshot_experiment(
         self,
@@ -568,3 +583,14 @@ class LoopEngine:
 
 def _timestamp() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def _extract_markdown_title(text: str) -> str | None:
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("#"):
+            return stripped.lstrip("#").strip() or None
+        return stripped
+    return None
