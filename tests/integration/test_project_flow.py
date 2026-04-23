@@ -32,6 +32,16 @@ def test_project_scaffold_and_baseline(project_factory):
     assert baseline["record"]["outcome"] == "baseline"
     assert (Path(project_root) / "runs" / "0000_baseline" / "result.json").exists()
     assert (Path(project_root) / "runs" / "0000_baseline" / "experiment.py").exists()
+    history = load_json(Path(project_root) / "runs" / "latest" / "history.json")
+    assert history == [
+        {
+            "hypothesis_summary": "Baseline",
+            "iteration": 0,
+            "iteration_result": "baseline",
+            "iteration_score": 0.0,
+            "run_dir": "runs/0000_baseline",
+        }
+    ]
 
     status = get_status(str(project_root))
     assert status["current_phase"] == "READ_CONTEXT"
@@ -118,6 +128,37 @@ def test_three_iteration_run_with_revert_and_skip(project_factory):
     records = load_jsonl(Path(project_root) / "logs" / "results.jsonl")
     outcomes = [item["outcome"] for item in records]
     assert outcomes == ["baseline", "kept", "reverted_worse_metric", "skipped_no_change"]
+    history = load_json(Path(project_root) / "runs" / "latest" / "history.json")
+    assert history == [
+        {
+            "hypothesis_summary": "Baseline",
+            "iteration": 0,
+            "iteration_result": "baseline",
+            "iteration_score": 0.0,
+            "run_dir": "runs/0000_baseline",
+        },
+        {
+            "hypothesis_summary": "Increase metric",
+            "iteration": 1,
+            "iteration_result": "kept",
+            "iteration_score": 5.0,
+            "run_dir": "runs/0001",
+        },
+        {
+            "hypothesis_summary": "Worsen metric",
+            "iteration": 2,
+            "iteration_result": "reverted_worse_metric",
+            "iteration_score": 1.0,
+            "run_dir": "runs/0002",
+        },
+        {
+            "hypothesis_summary": "No-op",
+            "iteration": 3,
+            "iteration_result": "skipped_no_change",
+            "iteration_score": None,
+            "run_dir": "runs/0003",
+        },
+    ]
 
     summary = build_summary(str(project_root))
     assert summary["kept_iterations"] == 1
