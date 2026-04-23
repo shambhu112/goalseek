@@ -1,0 +1,10 @@
+iterations:
+  - title: Increase metric
+    reasoning: Raise the metric to a better value.
+    expected_impact: The metric should improve.
+    planned_files:
+      - experiment.py
+    apply:
+      kind: set_metric
+      path: experiment.py
+      value: 3

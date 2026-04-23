@@ -1,14 +1,14 @@
 provider:
   hypothesis:
-    name: claude_code
-    model: claude-haiku-4-5-20251001
+    name: {{ provider_name }}
+    model: {{ model_name }}
     non_interactive: true
     timeout_sec: 300
   implementation:
-    name: claude_code
-    model: claude-haiku-4-5-20251001
+    name: {{ provider_name }}
+    model: {{ model_name }}
     non_interactive: true
-    timeout_sec: 500
+    timeout_sec: 300
 
 loop:
   repair_attempts: 1
@@ -23,8 +23,8 @@ logging:
   format: "%(asctime)s %(levelname)s [%(name)s] %(message)s"
   handlers:
     - type: stdout
-    #- type: file
-    #  path: logs/goalseek.log
+    - type: file
+      path: logs/goalseek.log
     # - type: cloudwatch
-    #   log_group: /goalseek/demo
+    #   log_group: /goalseek/{{ project_name }}
     #   stream_name: "{project_name}"

@@ -70,7 +70,7 @@ instance/
 
 # Sphinx documentation
 docs/_build/
-
+demo/*
 # PyBuilder
 .pybuilder/
 target/
@@ -205,3 +205,4 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+goalseek.code-workspace

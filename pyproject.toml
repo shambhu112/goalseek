@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "goalseek"
+version = "0.1.0"
+description = "Local, audit-friendly research loop orchestration for coding agents."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "click>=8.1.7",
+  "jinja2>=3.1.4",
+  "marimo>=0.23.1",
+  "pandas>=3.0.2",
+  "pydantic>=2.7.0,<3",
+  "PyYAML>=6.0.2",
+  "rich>=13.7.1",
+]
+
+[project.optional-dependencies]
+cloudwatch = [
+  "boto3>=1.34.0",
+  "watchtower>=3.3.1",
+]
+dev = [
+  "pytest>=8.3.0",
+]
+
+[project.scripts]
+goalseek = "goalseek.cli.app:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/goalseek"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

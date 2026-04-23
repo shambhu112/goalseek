@@ -1,0 +1,30 @@
+iterations:
+  - title: Increase metric
+    reasoning: Raise the metric to a better value.
+    expected_impact: The metric should improve.
+    planned_files:
+      - experiment.py
+    apply:
+      kind: set_metric
+      path: experiment.py
+      value: 5
+      extra_lines:
+        - "# iteration 1"
+  - title: Worsen metric
+    reasoning: This intentionally worsens the score.
+    expected_impact: The metric should drop.
+    planned_files:
+      - experiment.py
+    apply:
+      kind: set_metric
+      path: experiment.py
+      value: 1
+      extra_lines:
+        - "# iteration 2"
+  - title: No-op
+    reasoning: Leave the file unchanged.
+    expected_impact: No source change.
+    planned_files:
+      - experiment.py
+    apply:
+      kind: no_op

@@ -1,7 +1,7 @@
 version: 1
 project:
-  name: demo
-  description: Research target for demo.
+  name: {{ project_name }}
+  description: Research target for {{ project_name }}.
 
 files:
   - path: manifest.yaml
@@ -39,7 +39,7 @@ verification:
       timeout_sec: 800
 
 metric:
-  name: Balanced accuracy Score
+  name: score
   direction: maximize
   extractor:
     type: json_file

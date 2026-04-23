@@ -1,0 +1,107 @@
+from __future__ import annotations
+
+import argparse
+import ast
+import json
+import os
+import re
+from pathlib import Path
+
+
+def parse_metric(project_root: Path) -> float:
+    experiment_path = project_root / "experiment.py"
+    source = experiment_path.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    for node in tree.body:
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name) and target.id == "METRIC":
+                    return float(ast.literal_eval(node.value))
+    raise SystemExit("METRIC assignment not found in experiment.py")
+
+
+def _parse_iteration_from_run_dir(run_dir: Path) -> int | None:
+    name = run_dir.name
+    if name == "0000_baseline":
+        return 0
+    if re.fullmatch(r"\d{4}", name):
+        return int(name)
+    return None
+
+
+def resolve_best_model_metadata(project_root: Path, current_metric: float) -> dict[str, object | None]:
+    results_path = project_root / "logs" / "results.jsonl"
+    best_iteration_num: int | None = None
+    best_metric = float("-inf")
+    best_experiment_path: str | None = None
+    if results_path.exists():
+        for line in results_path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            if record.get("outcome") not in {"baseline", "kept"}:
+                continue
+            metric_value = record.get("metric_value")
+            iteration = record.get("iteration")
+            run_dir = record.get("run_dir")
+            if not isinstance(metric_value, (int, float)) or not isinstance(iteration, int):
+                continue
+            if not isinstance(run_dir, str):
+                continue
+            experiment_path = project_root / run_dir / "experiment.py"
+            experiment_relpath = (
+                experiment_path.relative_to(project_root).as_posix()
+                if experiment_path.exists()
+                else None
+            )
+            if metric_value > best_metric or (
+                metric_value == best_metric and (best_iteration_num is None or iteration > best_iteration_num)
+            ):
+                best_metric = float(metric_value)
+                best_iteration_num = iteration
+                best_experiment_path = experiment_relpath
+
+    current_run_dir_value = os.environ.get("GOALSEEK_RUN_DIR")
+    if current_run_dir_value:
+        current_run_dir = Path(current_run_dir_value).resolve()
+        try:
+            current_run_dir.relative_to(project_root)
+        except ValueError:
+            current_run_dir = None
+        if current_run_dir is not None:
+            current_iteration_num = _parse_iteration_from_run_dir(current_run_dir)
+            current_experiment_path = current_run_dir / "experiment.py"
+            current_experiment_relpath = (
+                current_experiment_path.relative_to(project_root).as_posix()
+                if current_experiment_path.exists()
+                else None
+            )
+            if current_metric >= best_metric and current_iteration_num is not None:
+                best_iteration_num = current_iteration_num
+                best_experiment_path = current_experiment_relpath
+
+    if best_iteration_num is None and (project_root / "experiment.py").exists():
+        best_experiment_path = "experiment.py"
+    return {
+        "best_model_iteration_num": best_iteration_num,
+        "best_model_experiment_path": best_experiment_path,
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--evaluate", action="store_true")
+    parser.add_argument("--output", required=True)
+    args = parser.parse_args()
+    project_root = Path(__file__).resolve().parent
+    print(f"evaluating current experiment.py in {project_root}")
+    metric = parse_metric(project_root)
+    output_path = project_root / args.output
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {"metric": metric, **resolve_best_model_metadata(project_root, metric)}
+    output_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    print(f"metric={metric}")
+
+
+if __name__ == "__main__":
+    main()
