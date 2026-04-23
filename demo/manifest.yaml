@@ -1,0 +1,50 @@
+version: 1
+project:
+  name: demo
+  description: Research target for demo.
+
+files:
+  - path: manifest.yaml
+    mode: read_only
+  - path: program.md
+    mode: read_only
+  - path: setup.py
+    mode: read_only
+  - path: validate_results.py
+    mode: hidden
+  - path: experiment.py
+    mode: writable
+  - path: data/**
+    mode: read_only
+  - path: context/**
+    mode: read_only
+  - path: hidden/**
+    mode: hidden
+  - path: config/**
+    mode: read_only
+  - path: runs/**
+    mode: generated
+  - path: logs/**
+    mode: generated
+
+verification:
+  commands:
+    - name: train
+      run: python3 experiment.py
+      cwd: .
+      timeout_sec: 1200
+    - name: evaluate
+      run: python3 validate_results.py --evaluate --output runs/latest/results.json
+      cwd: .
+      timeout_sec: 800
+
+metric:
+  name: Balanced accuracy Score
+  direction: maximize
+  extractor:
+    type: json_file
+    path: runs/latest/results.json
+    json_pointer: /metric
+
+execution:
+  target: local

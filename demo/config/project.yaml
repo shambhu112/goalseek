@@ -1,0 +1,30 @@
+provider:
+  hypothesis:
+    name: claude_code
+    model: claude-haiku-4-5-20251001
+    non_interactive: true
+    timeout_sec: 300
+  implementation:
+    name: claude_code
+    model: claude-haiku-4-5-20251001
+    non_interactive: true
+    timeout_sec: 500
+
+loop:
+  repair_attempts: 1
+  stagnation_window: 3
+
+output:
+  rich: true
+
+logging:
+  enabled: true
+  level: DEBUG
+  format: "%(asctime)s %(levelname)s [%(name)s] %(message)s"
+  handlers:
+    - type: stdout
+    #- type: file
+    #  path: logs/goalseek.log
+    # - type: cloudwatch
+    #   log_group: /goalseek/demo
+    #   stream_name: "{project_name}"
