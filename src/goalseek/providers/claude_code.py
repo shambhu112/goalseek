@@ -128,22 +128,48 @@ def _run_claude_cli(
     if sanitize_plan_output:
         raw_text = _sanitize_plan_output(raw_text)
     stderr_text = result.stderr.strip()
+    empty_output = not result.stdout.strip() and not result.stderr.strip()
+    error: str | None
+    if result.exit_code != 0:
+        error = stderr_text or "command failed with no output"
+    elif empty_output:
+        error = "command produced no output"
+    elif not result.stdout and stderr_text:
+        error = stderr_text
+    else:
+        error = None
+    exit_code = result.exit_code if not (result.exit_code == 0 and empty_output) else 1
     return ProviderResponse(
         raw_text=raw_text,
-        exit_code=result.exit_code,
+        exit_code=exit_code,
         duration_sec=time.time() - start,
         changed_files=[],
-        error=stderr_text if result.exit_code != 0 or (not result.stdout and stderr_text) else None,
+        error=error,
     )
 
 
 def _validate_request(request: ProviderRequest, allowed_modes: set[str]) -> str | None:
+    errors: list[str] = []
     if request.mode not in allowed_modes:
         allowed = ", ".join(sorted(allowed_modes))
-        return f"unsupported mode '{request.mode}' for claude_code; expected one of: {allowed}"
+        errors.append(f"unsupported mode '{request.mode}' for claude_code; expected one of: {allowed}")
     if not request.prompt_text.strip():
-        return "prompt_text cannot be empty"
-    return None
+        errors.append("prompt_text cannot be empty")
+    if not request.model_name:
+        errors.append("model_name cannot be empty")
+    if request.timeout_sec <= 0:
+        errors.append(f"timeout_sec must be positive, got {request.timeout_sec}")
+    if request.iteration <= 0:
+        errors.append(f"iteration must be positive, got {request.iteration}")
+    for path in request.writable_paths:
+        if Path(path).is_absolute():
+            errors.append(f"writable_paths must be relative, got absolute path: {path}")
+    for path in request.generated_paths:
+        if not path:
+            errors.append("generated_paths entries cannot be empty strings")
+        elif path.startswith("..") or "/../" in path:
+            errors.append(f"generated_paths must not escape project root with '..': {path}")
+    return "; ".join(errors) if errors else None
 
 
 def _sanitize_plan_output(raw_text: str) -> str:
