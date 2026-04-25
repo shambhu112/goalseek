@@ -1,0 +1,10 @@
+iterations:
+  - title: Output structure scenario
+    reasoning: Produce a deterministic baseline-compatible fake provider scenario.
+    expected_impact: Baseline output should include the standard response fields.
+    planned_files:
+      - experiment.py
+    apply:
+      kind: set_metric
+      path: experiment.py
+      value: 2
