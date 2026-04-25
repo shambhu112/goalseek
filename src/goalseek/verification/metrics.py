@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from pathlib import Path
 
@@ -39,7 +40,15 @@ def extract_metric(
     )
 
 
-def compare(previous: float, current: float, direction: str, epsilon: float) -> str:
+def compare(previous: float | None, current: float | None, direction: str, epsilon: float) -> str:
+    previous_is_valid = _is_finite_metric(previous)
+    current_is_valid = _is_finite_metric(current)
+    if not previous_is_valid or not current_is_valid:
+        if current_is_valid and not previous_is_valid:
+            return "better"
+        if previous_is_valid and not current_is_valid:
+            return "worse"
+        return "equal"
     if direction == "maximize":
         if current > previous + epsilon:
             return "better"
@@ -53,7 +62,9 @@ def compare(previous: float, current: float, direction: str, epsilon: float) -> 
     return "worse"
 
 
-def thresholds_pass(metric: MetricConfig, value: float) -> bool:
+def thresholds_pass(metric: MetricConfig, value: float | None) -> bool:
+    if not _is_finite_metric(value):
+        return False
     if metric.min_pass is not None and value < metric.min_pass:
         return False
     if metric.max_pass is not None and value > metric.max_pass:
@@ -89,3 +100,10 @@ def _extract_regex(haystack: str, pattern: str) -> float:
         return float(match.group(1))
     except (IndexError, ValueError) as exc:
         raise MetricExtractionError("metric regex must expose one numeric capture group") from exc
+
+
+def _is_finite_metric(value: float | None) -> bool:
+    try:
+        return value is not None and math.isfinite(value)
+    except TypeError:
+        return False
