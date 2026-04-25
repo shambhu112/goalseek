@@ -36,6 +36,35 @@ rsync -a --prune-empty-dirs \
 echo "Building package..."
 "$PYTHON" -m build "$STAGING_DIR" --outdir "$SCRIPT_DIR/dist"
 
+echo "Updating version metadata..."
+"$PYTHON" - <<'PY'
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+import tomllib
+
+script_dir = Path.cwd()
+pyproject_path = script_dir / "pyproject.toml"
+version_info_path = script_dir / "dist" / "version-info.json"
+
+with pyproject_path.open("rb") as f:
+    project = tomllib.load(f)["project"]
+
+version = project["version"]
+sdist_name = f"{project['name']}-{version}.tar.gz"
+build_date = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+version_info = {}
+if version_info_path.exists():
+    version_info = json.loads(version_info_path.read_text())
+
+version_info["production-version"] = version
+version_info["production-version-file"] = sdist_name
+version_info["build-date"] = build_date
+
+version_info_path.write_text(json.dumps(version_info, indent=4) + "\n")
+PY
+
 echo ""
 echo "Built files:"
 ls -lh dist/
