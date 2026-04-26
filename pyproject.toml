@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "goalseek"
-version = "0.1.0"
+version = "0.1.1"
 description = "Local, audit-friendly research loop orchestration for coding agents."
 readme = "README.md"
 requires-python = ">=3.11"
