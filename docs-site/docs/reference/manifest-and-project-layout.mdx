@@ -1,0 +1,107 @@
+---
+title: Manifest and Project Layout
+description: Project scaffold shape, manifest scope modes, and verification contracts.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The manifest is the contract that tells `goalseek` what the provider can see, what it can modify, and how results are verified.
+
+## Project layout
+
+`goalseek project init` creates a scaffold like this:
+
+```text
+<project_name>/
+  .git/
+  .gitignore
+  manifest.yaml
+  program.md
+  setup.py
+  experiment.py
+  knowledge/
+  context/
+  hidden/
+  config/
+    project.yaml
+  runs/
+  logs/
+```
+
+### Important directories
+
+- `context/`: visible reference material for the provider
+- `hidden/`: files used by setup or verification that should not be visible to the provider
+- `runs/`: iteration artifacts
+- `logs/`: resumable state and append-only result history
+
+## Scope modes
+
+The manifest separates files into four modes:
+
+| Mode | Meaning |
+| --- | --- |
+| `read_only` | visible to the provider but not writable |
+| `writable` | visible and editable |
+| `generated` | artifacts written by the loop such as `runs/**` and `logs/**` |
+| `hidden` | intentionally excluded from provider context |
+
+## Metric extraction
+
+Verification commands decide whether a candidate is valid. Metric extraction then turns verifier output into a scalar value the loop can compare over time.
+
+<Tabs>
+  <TabItem value="json" label="JSON file" default>
+
+Use a verifier that writes structured output, then point the metric extractor at the JSON location.
+
+  </TabItem>
+  <TabItem value="stdout" label="stdout regex">
+
+Capture a metric directly from standard output when the verifier prints a stable line format.
+
+  </TabItem>
+  <TabItem value="stderr" label="stderr regex">
+
+Useful when tools report the metric on standard error instead of standard output.
+
+  </TabItem>
+</Tabs>
+
+## Minimal manifest shape
+
+```yaml
+version: 1
+project:
+  name: goalseek_demo
+metric:
+  name: Balanced accuracy Score
+  direction: maximize
+scope:
+  read_only:
+    - context/**
+  writable:
+    - experiment.py
+    - program.md
+  generated:
+    - runs/**
+    - logs/**
+  hidden:
+    - hidden/**
+verification:
+  commands:
+    - command: python validate_results.py
+      cwd: .
+```
+
+:::warning Hidden files are a real boundary
+`hidden/` is meant for data the provider should not see directly, such as sensitive inputs, evaluation logic, or ground truth the agent could otherwise game.
+:::
+
+## Defaults worth knowing
+
+- `runs/` and `logs/` are git-ignored in scaffolded projects.
+- `experiment.py` and `program.md` are intended as default writable files.
+- The working tree must be clean before `run` applies a change.
+- Rejected changes are reverted with `git revert`, not discarded with history rewriting.

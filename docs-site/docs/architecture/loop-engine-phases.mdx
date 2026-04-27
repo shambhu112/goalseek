@@ -1,0 +1,77 @@
+---
+title: Loop Engine Phases
+description: A phase-by-phase reference for READ_CONTEXT, PLAN, APPLY_CHANGE, COMMIT, VERIFY, DECIDE, and LOG.
+---
+
+Each iteration in `goalseek` runs the same ordered phase pipeline:
+
+```text
+READ_CONTEXT -> PLAN -> APPLY_CHANGE -> COMMIT -> VERIFY -> DECIDE -> LOG
+```
+
+## Phase table
+
+| Phase | What happens | Key artifacts | Provider called |
+| --- | --- | --- | --- |
+| `READ_CONTEXT` | Reads recent git history, manifest-visible files, recent results, and active directions | `git_before.txt`, `env.json`, updated `logs/state.json` | No |
+| `PLAN` | Builds a planning prompt and asks the provider for a focused plan | `prompt.md`, `plan.md`, `provider_output.md` | Yes |
+| `APPLY_CHANGE` | Confirms clean git state, applies edits, and checks changed files against manifest scope | changed project files, optional `experiment.py` snapshot | Yes |
+| `COMMIT` | Stages changes and creates a candidate commit | git commit only | No |
+| `VERIFY` | Runs verification commands and extracts the metric | `verifier.log`, `metrics.json` | No |
+| `DECIDE` | Compares candidate metric to retained metric and reverts if needed | git revert on rejected change | No |
+| `LOG` | Captures final state and appends the result record | `result.json`, `results_discussion.md`, `git_after.txt`, `logs/results.jsonl` | No |
+
+## READ_CONTEXT
+
+This phase grounds the iteration before a provider writes anything. It gathers recent git history, recent results, visible file hashes, and active directions so the next prompt has enough local context to act deliberately.
+
+## PLAN
+
+The provider receives a planning prompt that includes:
+
+- project name
+- scope patterns from the manifest
+- recent iteration outcomes
+- current directions
+- stagnation signals when progress has flattened
+
+The provider responds with a plan and intended file targets.
+
+## APPLY_CHANGE
+
+This phase uses the approved plan text as the implementation prompt. After the provider edits files, `goalseek` checks that every change is within writable or generated scope.
+
+:::warning Scope violations are immediate failures
+If the provider touches files outside allowed scope, the system treats that as a bad candidate and rolls the change back through git rather than silently accepting it.
+:::
+
+## VERIFY
+
+Verification commands run in the manifest-defined working directories with environment variables like `GOALSEEK_RUN_DIR` and `GOALSEEK_PROJECT_ROOT`. The loop stops on the first verifier failure.
+
+Metric extraction can come from:
+
+- a JSON file
+- a regex applied to stdout
+- a regex applied to stderr
+
+## DECIDE
+
+Decision logic compares the candidate result to the retained best result:
+
+- better metrics are kept
+- worse metrics are reverted
+- ties prefer mechanically simpler changes when applicable
+
+Rejected changes use `git revert --no-edit`, preserving history instead of rewriting it.
+
+## LOG
+
+The final phase writes the durable summary of the attempt:
+
+- final git state snapshot
+- human-readable result discussion
+- machine-readable `result.json`
+- append-only `logs/results.jsonl`
+
+That artifact set is the package memory for future iterations and later inspection.

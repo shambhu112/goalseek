@@ -1,0 +1,56 @@
+---
+title: Design Notes
+description: Maintainer-oriented implementation notes and product invariants for goalseek.
+---
+
+This page is contributor-oriented. It summarizes the implementation intent behind the package rather than teaching day-one usage.
+
+## Product invariants
+
+These rules shape the implementation:
+
+1. A project directory is the top-level execution and audit boundary.
+2. The system reads scoped context before provider-driven writes.
+3. One iteration should attempt one focused change.
+4. Keep-or-revert decisions rely on objective verification.
+5. Rejected changes are reverted with `git revert`, not destructive resets.
+6. Git history is part of the product memory.
+
+## MVP architecture choices
+
+- Python 3.11+
+- `src/` package layout
+- `pyproject.toml` packaging
+- `PyYAML` for YAML parsing
+- `pydantic` v2 for manifest and config validation
+- system `git` CLI rather than GitPython
+- provider integrations as wrappers around local CLIs or executables
+- JSON and JSONL for artifacts and append-only records
+
+## Public surface and core internals
+
+- Public API entry point: `goalseek.api`
+- CLI entry point: `goalseek.cli.app:cli`
+- Loop orchestration: `LoopEngine` and `StepEngine`
+- Scope and config services: `ManifestService`, `ProjectService`
+- Persistence: `ArtifactStore`, `StateStore`, `SummaryService`
+
+## Scaffold intent
+
+The generated project layout is deliberately simple:
+
+- `program.md` stores hypothesis and planning context
+- `experiment.py` stores the main writable experiment implementation
+- `hidden/` supports evaluation assets and other non-provider-visible inputs
+- `runs/` and `logs/` keep local experiment state inspectable
+
+## Contributor guidance
+
+- Prefer changes that keep the audit trail obvious.
+- Treat manifest scope checks as correctness features, not convenience checks.
+- Keep new provider integrations aligned with the existing adapter pattern.
+- Avoid adding abstractions that weaken the step-by-step artifact trail.
+
+:::tip Maintainer mindset
+If a new feature makes the loop harder to inspect from the filesystem or from git history, it is probably moving against the core product shape.
+:::

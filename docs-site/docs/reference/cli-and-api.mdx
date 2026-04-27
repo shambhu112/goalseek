@@ -1,0 +1,102 @@
+---
+title: CLI and API Reference
+description: Public commands and Python entry points exposed by goalseek.
+---
+
+`goalseek` is CLI-first, but the public Python API mirrors the core lifecycle well enough for notebooks, scripts, and automation.
+
+## CLI commands
+
+Run `uv run goalseek --help` to see the full command tree.
+
+| Command | Purpose |
+| --- | --- |
+| `project init` | Scaffold a new research project |
+| `manifest validate` | Validate the project manifest |
+| `setup` | Run one-time project preparation |
+| `baseline` | Capture the retained metric for the current project state |
+| `run` | Execute one or more full research iterations |
+| `step` | Advance a project through step mode |
+| `direct` | Add user guidance for future iterations |
+| `status` | Inspect current loop state |
+| `summary` | Build a project summary |
+| `gittreeclean` | Commit local changes so the tree is ready for iterations |
+
+### `project init`
+
+```bash
+uv run goalseek project init NAME [--path PATH] [--provider codex|claude_code|opencode|gemini|fake] [--model MODEL] [--no-git-init]
+```
+
+### `run`
+
+```bash
+uv run goalseek run PROJECT [--iterations N] [--time MINUTES]
+```
+
+### `direct`
+
+```bash
+uv run goalseek direct PROJECT --message "Try a simpler model" [--applies-from-iteration N]
+```
+
+### `gittreeclean`
+
+```bash
+uv run goalseek gittreeclean PROJECT [--message "chore: clean working tree"]
+```
+
+## Python API
+
+The public entry points live in `goalseek.api`.
+
+```python
+from goalseek.api import (
+    add_direction,
+    build_summary,
+    clean_git_tree,
+    get_status,
+    init_project,
+    run_baseline,
+    run_loop,
+    run_setup,
+    run_step,
+    validate_manifest,
+)
+```
+
+### Common calls
+
+```python
+from goalseek import api
+
+root = api.init_project("demo", provider="codex", model="gpt-5-codex")
+api.validate_manifest(root)
+api.run_setup(root)
+api.run_baseline(root)
+api.run_loop(root, iterations=3)
+status = api.get_status(root)
+summary = api.build_summary(root)
+```
+
+## Provider names
+
+The provider registry currently exposes:
+
+- `codex`
+- `claude_code`
+- `opencode`
+- `gemini`
+- `fake`
+
+`fake` is intended for tests and local development fixtures rather than real research runs.
+
+## What the CLI wraps
+
+- CLI commands live under `goalseek.cli.commands`.
+- The CLI delegates quickly into the public API.
+- The public API delegates into services like `LoopEngine`, `StepEngine`, `ManifestService`, and `SummaryService`.
+
+:::tip Use the API when you want composition
+The CLI is the easiest path for end users. The Python API is a better fit when you want to wrap `goalseek` inside another local workflow or notebook.
+:::

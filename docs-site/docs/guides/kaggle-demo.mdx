@@ -1,0 +1,114 @@
+---
+title: Kaggle Demo
+description: Run the sample irrigation project from baseline through three iterations.
+---
+
+This repo includes a demo package that behaves like a small research project. It is the fastest way to see `goalseek` produce runs, logs, and git-backed iteration history.
+
+## Fresh project walkthrough
+
+### 1. Install the package
+
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install -e ".[dev]"
+```
+
+### 2. Create a new project
+
+```bash
+uv run goalseek project init demo --provider claude_code --model claude-haiku-4-5-20251001
+```
+
+### 3. Copy the included sample assets
+
+```bash
+./move-testpackage.sh --overwrite ./demo
+```
+
+### 4. Validate the manifest
+
+For the irrigation example, the metric should be `Balanced accuracy Score`.
+
+```yaml
+metric:
+  name: Balanced accuracy Score
+  direction: maximize
+```
+
+Then validate:
+
+```bash
+uv run goalseek manifest validate ./demo
+```
+
+### 5. Run setup
+
+```bash
+uv run goalseek setup ./demo
+```
+
+### 6. Clean the git tree
+
+```bash
+uv run goalseek gittreeclean --message "clean repo" ./demo
+```
+
+### 7. Run the baseline
+
+```bash
+uv run goalseek baseline ./demo
+```
+
+### 8. Run three iterations
+
+```bash
+uv run goalseek run ./demo --iterations 3
+```
+
+### 9. Review the result
+
+```bash
+uv run goalseek status ./demo
+uv run goalseek summary ./demo
+```
+
+## Helpful files during the demo
+
+- `demo/logs/state.json`
+- `demo/logs/results.jsonl`
+- `demo/runs/0001/prompt.md`
+- `demo/runs/0001/provider_output.md`
+- `demo/runs/0001/result.json`
+
+## Common fixes
+
+### Dirty working tree before iteration
+
+Check the tree:
+
+```bash
+git -C demo status --short
+```
+
+Keep the edits:
+
+```bash
+git -C demo add --all
+git -C demo commit -m "save local changes"
+```
+
+Discard the edits you do not want:
+
+```bash
+git -C demo restore <path>
+```
+
+### Missing Python packages during setup
+
+Install the required dependencies in your project environment and rerun `goalseek setup ./demo`.
+
+### Verification surprises
+
+Inspect `demo/runs/<iteration>/verifier.log` and confirm the metric extractor matches the verification output.

@@ -1,0 +1,167 @@
+---
+title: Quickstart
+description: Install goalseek, create a project, run setup, capture a baseline, and start iterating.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+`goalseek` works best when you treat the project directory as an audit boundary: manifest, logs, runs, and research code all live there.
+
+## Prerequisites
+
+- Python 3.11 or newer
+- `git`
+- one provider CLI available on `PATH` such as `codex`, `claude`, `gemini`, or `opencode`
+
+:::warning Clean git state matters
+The loop creates candidate commits and may revert them. Start from a clean working tree before you run research iterations.
+:::
+
+## Install the package
+
+<Tabs>
+  <TabItem value="uv" label="uv" default>
+
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install -e ".[dev]"
+```
+
+  </TabItem>
+  <TabItem value="pip" label="pip">
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+```
+
+  </TabItem>
+</Tabs>
+
+Verify the CLI:
+
+```bash
+uv run goalseek --help
+```
+
+## Create a project
+
+Choose a provider and model, then scaffold a new project.
+
+<Tabs>
+  <TabItem value="codex" label="Codex" default>
+
+```bash
+uv run goalseek project init demo --provider codex --model gpt-5-codex
+```
+
+  </TabItem>
+  <TabItem value="claude" label="Claude Code">
+
+```bash
+uv run goalseek project init demo --provider claude_code --model claude-haiku-4-5-20251001
+```
+
+  </TabItem>
+  <TabItem value="gemini" label="Gemini">
+
+```bash
+uv run goalseek project init demo --provider gemini --model gemini-2.5-pro
+```
+
+  </TabItem>
+  <TabItem value="opencode" label="OpenCode">
+
+```bash
+uv run goalseek project init demo --provider opencode --model gpt-5-codex
+```
+
+  </TabItem>
+</Tabs>
+
+The scaffold includes:
+
+```text
+demo/
+  manifest.yaml
+  program.md
+  setup.py
+  experiment.py
+  config/project.yaml
+  context/
+  hidden/
+  logs/
+  runs/
+```
+
+## Import the sample research assets
+
+This repo includes a demo package with a small Kaggle-style example.
+
+```bash
+./move-testpackage.sh --overwrite ./demo
+```
+
+Validate the manifest:
+
+```bash
+uv run goalseek manifest validate ./demo
+```
+
+## Run the lifecycle
+
+1. Prepare the project:
+
+```bash
+uv run goalseek setup ./demo
+```
+
+2. Commit any local changes before agent-driven edits:
+
+```bash
+uv run goalseek gittreeclean --message "clean repo" ./demo
+```
+
+3. Capture a baseline metric:
+
+```bash
+uv run goalseek baseline ./demo
+```
+
+4. Run a few iterations:
+
+```bash
+uv run goalseek run ./demo --iterations 3
+```
+
+5. Inspect status and summary:
+
+```bash
+uv run goalseek status ./demo
+uv run goalseek summary ./demo
+```
+
+## What to expect on disk
+
+- `runs/0000_baseline/` stores baseline artifacts.
+- `runs/0001/`, `runs/0002/`, and later directories store iteration-specific prompts, plans, logs, and result records.
+- `logs/state.json` stores resumable loop state.
+- `logs/results.jsonl` stores append-only result summaries.
+
+:::tip Good first inspection points
+Open `runs/0001/prompt.md`, `runs/0001/provider_output.md`, and `runs/0001/result.json` after your first iteration. Those files make the system much easier to reason about.
+:::
+
+## Common failure modes
+
+- Missing provider CLI executable:
+  install the matching provider tool and make sure it is available on `PATH`.
+- Dirty working tree:
+  commit or restore local changes before `run`.
+- Manifest issues:
+  re-run `goalseek manifest validate` and check path scopes plus metric extraction rules.
+- Verification failures:
+  inspect `runs/<iteration>/verifier.log`.
