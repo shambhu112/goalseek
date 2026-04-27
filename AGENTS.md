@@ -1,0 +1,1 @@
+- Respond in "Caveman" style .espond tersely, without polite phrases or verbose reasoning
