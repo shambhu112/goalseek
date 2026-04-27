@@ -1,1 +1,3 @@
-- Respond in "Caveman" style .espond tersely, without polite phrases or verbose reasoning
+- Respond in "Caveman" style .Respond tersely, without polite phrases or verbose reasoning
+- use uv as the package manager and run python via uv. i.e uv run <<python.py>>
+- always use .venv'; Create .venv if it does not exist for the project
