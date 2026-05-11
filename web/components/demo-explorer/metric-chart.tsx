@@ -229,7 +229,7 @@ export function MetricChart({
                 content={<CustomTooltip />}
                 cursor={{ stroke: "oklch(0.7 0.05 250)", strokeDasharray: "4 4" }}
               />
-              {baselineValue !== undefined && (
+              {baselineValue != null && (
                 <ReferenceLine
                   y={baselineValue}
                   stroke="oklch(0.55 0.12 250)"
@@ -248,12 +248,16 @@ export function MetricChart({
                 stroke="oklch(0.5 0.1 250)"
                 strokeWidth={2}
                 connectNulls
-                dot={(props) => (
-                  <CustomDot
-                    {...props}
-                    selectedIteration={selectedIteration}
-                  />
-                )}
+                dot={(props) => {
+                  const { key, ...dotProps } = props;
+                  return (
+                    <CustomDot
+                      key={key}
+                      {...dotProps}
+                      selectedIteration={selectedIteration}
+                    />
+                  );
+                }}
                 activeDot={false}
               />
             </LineChart>

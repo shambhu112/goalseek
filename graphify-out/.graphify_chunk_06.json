@@ -1,0 +1,101 @@
+{
+  "nodes": [
+    {
+      "id": "icon-light-32x32_AppIcon",
+      "label": "GoalSeek App Icon (Light, 32x32)",
+      "file_type": "image",
+      "source_file": "web/public/icon-light-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-light-32x32_v0Logotype",
+      "label": "v0 Logotype",
+      "file_type": "image",
+      "source_file": "web/public/icon-light-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-light-32x32_LightThemeVariant",
+      "label": "Light Theme Icon Variant",
+      "file_type": "image",
+      "source_file": "web/public/icon-light-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-light-32x32_WebPublicAsset",
+      "label": "Web Public Static Asset",
+      "file_type": "image",
+      "source_file": "web/public/icon-light-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "icon-light-32x32_AppIcon",
+      "to": "icon-light-32x32_v0Logotype",
+      "relation": "DISPLAYS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "notes": "The 32x32 icon visually displays the 'v0' logotype in white on a black rounded-square background."
+    },
+    {
+      "from": "icon-light-32x32_AppIcon",
+      "to": "icon-light-32x32_LightThemeVariant",
+      "relation": "IS_VARIANT_OF_THEME",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "notes": "Filename explicitly includes 'light', indicating this is the light-theme variant of the icon."
+    },
+    {
+      "from": "icon-light-32x32_AppIcon",
+      "to": "icon-light-32x32_WebPublicAsset",
+      "relation": "SERVED_AS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "notes": "File resides in web/public/, making it a static web asset served directly to the browser."
+    },
+    {
+      "from": "icon-light-32x32_AppIcon",
+      "to": "icon-light-32x32_AppIcon",
+      "relation": "HAS_DIMENSIONS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "notes": "Filename specifies 32x32 pixel dimensions."
+    },
+    {
+      "from": "icon-light-32x32_v0Logotype",
+      "to": "icon-light-32x32_AppIcon",
+      "relation": "IDENTIFIES",
+      "provenance": "INFERRED",
+      "confidence_score": 0.85,
+      "notes": "'v0' likely refers to the GoalSeek application branding or a versioning convention used as the product identity mark."
+    },
+    {
+      "from": "icon-light-32x32_LightThemeVariant",
+      "to": "icon-light-32x32_WebPublicAsset",
+      "relation": "USED_IN",
+      "provenance": "INFERRED",
+      "confidence_score": 0.85,
+      "notes": "Light-theme icon variants are typically used in browser favicon or UI contexts where a light/dark pair is selected based on user preference."
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

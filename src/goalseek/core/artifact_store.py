@@ -29,16 +29,19 @@ class ArtifactStore:
 
     def write_text(self, run_dir: Path, name: str, content: str) -> Path:
         target = run_dir / name
+        target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(content, encoding="utf-8")
         return target
 
     def write_json(self, run_dir: Path, name: str, payload: Any) -> Path:
         target = run_dir / name
+        target.parent.mkdir(parents=True, exist_ok=True)
         dump_json_atomic(target, payload)
         return target
 
     def copy_file(self, run_dir: Path, source: Path, name: str | None = None) -> Path:
         target = run_dir / (name or source.name)
+        target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
         return target
 

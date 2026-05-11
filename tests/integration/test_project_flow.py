@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -184,6 +185,27 @@ def test_step_mode_resume_and_direction_injection(project_factory):
     assert state["current_phase"] == "READ_CONTEXT"
     records = load_jsonl(Path(project_root) / "logs" / "results.jsonl")
     assert records[-1]["outcome"] == "kept"
+
+
+def test_apply_phase_resumes_existing_changes_when_run_dir_is_missing(project_factory):
+    project_root = project_factory("resume-apply")
+    write_fake_provider(project_root, "fake_provider_single_improve.yaml")
+    run_baseline(str(project_root))
+
+    state = run_step(str(project_root))
+    assert state["current_phase"] == "PLAN"
+    state = run_step(str(project_root))
+    assert state["current_phase"] == "APPLY_CHANGE"
+
+    run_dir = Path(project_root) / "runs" / "0001"
+    shutil.rmtree(run_dir)
+    experiment = Path(project_root) / "experiment.py"
+    experiment.write_text(experiment.read_text(encoding="utf-8") + "\n# interrupted apply\n", encoding="utf-8")
+
+    state = run_step(str(project_root))
+
+    assert state["current_phase"] == "COMMIT"
+    assert (run_dir / "experiment.py").exists()
 
 
 def test_validate_results_includes_best_model_iteration_metadata(project_factory):

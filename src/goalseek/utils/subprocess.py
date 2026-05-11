@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import logging
 import os
-import selectors
 import subprocess
+import threading
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -43,38 +43,35 @@ def run_command(
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
+        encoding="utf-8",
         bufsize=1,
     )
-    selector = selectors.DefaultSelector()
     assert process.stdout is not None
     assert process.stderr is not None
-    selector.register(process.stdout, selectors.EVENT_READ, data="stdout")
-    selector.register(process.stderr, selectors.EVENT_READ, data="stderr")
     stdout_chunks: list[str] = []
     stderr_chunks: list[str] = []
 
-    while selector.get_map():
-        if timeout_sec and time.time() - start > timeout_sec:
-            process.kill()
-            logger.warning("Command timed out after %ss: %s", timeout_sec, command)
-            raise TimeoutError(f"command timed out after {timeout_sec}s: {command}")
-        for key, _ in selector.select(timeout=0.1):
-            stream = key.fileobj
-            chunk = stream.readline()
-            if not chunk:
-                selector.unregister(stream)
-                continue
-            if key.data == "stdout":
-                stdout_chunks.append(chunk)
-            else:
-                stderr_chunks.append(chunk)
+    def _reader(stream, chunks):
+        for line in stream:
+            chunks.append(line)
             if stream_callback:
-                stream_callback(chunk)
+                stream_callback(line)
 
-        if process.poll() is not None and not selector.get_map():
-            break
+    stdout_thread = threading.Thread(target=_reader, args=(process.stdout, stdout_chunks), daemon=True)
+    stderr_thread = threading.Thread(target=_reader, args=(process.stderr, stderr_chunks), daemon=True)
+    stdout_thread.start()
+    stderr_thread.start()
 
-    exit_code = process.wait(timeout=1)
+    try:
+        process.wait(timeout=timeout_sec or None)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        logger.warning("Command timed out after %ss: %s", timeout_sec, command)
+        raise TimeoutError(f"command timed out after {timeout_sec}s: {command}")
+
+    stdout_thread.join()
+    stderr_thread.join()
+    exit_code = process.returncode
     result = CommandResult(
         args=command,
         cwd=str(cwd),

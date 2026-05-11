@@ -1,0 +1,93 @@
+{
+  "nodes": [
+    {
+      "id": "apple-icon_AppleIcon",
+      "label": "Apple Touch Icon (GoalSeek)",
+      "file_type": "image",
+      "source_file": "web/public/apple-icon.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "apple-icon_GoalSeekBrand",
+      "label": "GoalSeek Brand / Logo Mark",
+      "file_type": "image",
+      "source_file": "web/public/apple-icon.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "apple-icon_WebPublicAssets",
+      "label": "Web Public Static Assets",
+      "file_type": "image",
+      "source_file": "web/public/apple-icon.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "apple-icon_GoalSeekWebApp",
+      "label": "GoalSeek Web Application",
+      "file_type": "image",
+      "source_file": "web/public/apple-icon.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "apple-icon_AppleIcon",
+      "to": "apple-icon_GoalSeekBrand",
+      "relation": "DISPLAYS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "The apple-icon.png file visually displays the GoalSeek monogram logo mark (stylized V+Z letters in white on black background)."
+    },
+    {
+      "from": "apple-icon_AppleIcon",
+      "to": "apple-icon_WebPublicAssets",
+      "relation": "BELONGS_TO",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "File resides at web/public/apple-icon.png, placing it within the web public static assets directory."
+    },
+    {
+      "from": "apple-icon_AppleIcon",
+      "to": "apple-icon_GoalSeekWebApp",
+      "relation": "IS_ICON_FOR",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "Apple touch icons (apple-icon.png in public/) are served as home-screen icons when users add the web app to their iOS device; strongly associated with the GoalSeek web application."
+    },
+    {
+      "from": "apple-icon_GoalSeekBrand",
+      "to": "apple-icon_GoalSeekWebApp",
+      "relation": "REPRESENTS",
+      "provenance": "INFERRED",
+      "confidence_score": 0.85,
+      "note": "The monogram logo mark represents the GoalSeek product brand identity used across the web application."
+    },
+    {
+      "from": "apple-icon_WebPublicAssets",
+      "to": "apple-icon_GoalSeekWebApp",
+      "relation": "SERVES_ASSETS_FOR",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "The web/public directory is the standard static asset root served by the GoalSeek web application."
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 512,
+  "output_tokens": 390
+}

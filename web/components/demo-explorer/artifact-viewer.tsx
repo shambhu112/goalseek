@@ -177,7 +177,7 @@ export function ArtifactViewer({
       <ArtifactSection
         title="Verifier Log"
         icon={<Terminal className="h-4 w-4 text-muted-foreground" />}
-        content={verifierLog}
+        content={verifierLog ?? null}
         type="text"
       />
     </div>

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(rm -f .graphify_cached.json .graphify_uncached.txt graphify-out/.graphify_semantic_new.json)"
+    ]
+  }
+}

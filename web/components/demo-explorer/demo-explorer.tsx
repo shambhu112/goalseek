@@ -6,9 +6,11 @@ import { ProjectHeader } from "./project-header";
 import { MetricChart } from "./metric-chart";
 import { RunList } from "./run-list";
 import { RunDetailPanel } from "./run-detail-panel";
+import { ChangeAnalysisTab } from "./change-analysis-tab";
 import { FolderPickerDialog } from "./folder-picker-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlertCircle } from "lucide-react";
 import { DEFAULT_DEMO_ROOT } from "@/lib/defaults";
 import type {
@@ -131,50 +133,62 @@ export function DemoExplorer() {
           isLoading={isLoading}
         />
 
-        {/* Main content */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] xl:grid-cols-[1fr_500px] gap-6">
-          {/* Left column: Chart and Run List */}
-          <div className="space-y-6 min-w-0">
-            {/* Metric Chart */}
-            {runsLoading ? (
-              <Card>
-                <CardContent className="p-6">
-                  <Skeleton className="h-[200px] w-full" />
-                </CardContent>
-              </Card>
-            ) : (
-              <MetricChart
-                data={runsData?.chartData || []}
-                metricName={summary?.metricName || "Metric"}
-                metricDirection={summary?.metricDirection || "maximize"}
-                selectedIteration={selectedIteration}
-                onSelectIteration={setSelectedIteration}
-              />
-            )}
+        <Tabs defaultValue="results" className="gap-4">
+          <TabsList className="grid h-auto w-full max-w-[420px] grid-cols-2">
+            <TabsTrigger value="results">Results Analysis</TabsTrigger>
+            <TabsTrigger value="changes">Change Analysis</TabsTrigger>
+          </TabsList>
 
-            {/* Run List */}
-            {runsLoading ? (
-              <Card>
-                <CardContent className="p-6 space-y-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Skeleton key={i} className="h-12 w-full" />
-                  ))}
-                </CardContent>
-              </Card>
-            ) : (
-              <RunList
-                runs={runsData?.runs || []}
-                selectedIteration={selectedIteration}
-                onSelectRun={setSelectedIteration}
-              />
-            )}
-          </div>
+          <TabsContent value="results" className="outline-none">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_450px] xl:grid-cols-[1fr_500px]">
+              <div className="min-w-0 space-y-6">
+                {runsLoading ? (
+                  <Card>
+                    <CardContent className="p-6">
+                      <Skeleton className="h-[200px] w-full" />
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <MetricChart
+                    data={runsData?.chartData || []}
+                    metricName={summary?.metricName || "Metric"}
+                    metricDirection={summary?.metricDirection || "maximize"}
+                    selectedIteration={selectedIteration}
+                    onSelectIteration={setSelectedIteration}
+                  />
+                )}
 
-          {/* Right column: Run Detail Panel */}
-          <div className="lg:sticky lg:top-6 lg:self-start">
-            <RunDetailPanel run={selectedRun || null} isLoading={runLoading} />
-          </div>
-        </div>
+                {runsLoading ? (
+                  <Card>
+                    <CardContent className="space-y-3 p-6">
+                      {[...Array(5)].map((_, i) => (
+                        <Skeleton key={i} className="h-12 w-full" />
+                      ))}
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <RunList
+                    runs={runsData?.runs || []}
+                    selectedIteration={selectedIteration}
+                    onSelectRun={setSelectedIteration}
+                  />
+                )}
+              </div>
+
+              <div className="lg:sticky lg:top-6 lg:self-start">
+                <RunDetailPanel run={selectedRun || null} isLoading={runLoading} />
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="changes" className="outline-none">
+            <ChangeAnalysisTab
+              rootFolder={rootFolder}
+              runs={runsData?.runs || []}
+              selectedIteration={selectedIteration}
+            />
+          </TabsContent>
+        </Tabs>
       </div>
 
       {/* Folder Picker Dialog */}
