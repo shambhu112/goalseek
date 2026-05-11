@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    {
+      "id": "placeholder_PlaceholderImage",
+      "label": "Placeholder Image",
+      "file_type": "image",
+      "source_file": "web/public/placeholder.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [],
+  "hyperedges": [],
+  "input_tokens": 1124,
+  "output_tokens": 112
+}

@@ -1,0 +1,77 @@
+{
+  "nodes": [
+    {
+      "id": "icon-dark-32x32_AppIcon",
+      "label": "App Dark Icon (32x32)",
+      "file_type": "image",
+      "source_file": "web/public/icon-dark-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-dark-32x32_VIOLogo",
+      "label": "VIO / V10 Logo Mark",
+      "file_type": "image",
+      "source_file": "web/public/icon-dark-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-dark-32x32_DarkTheme",
+      "label": "Dark Theme Variant",
+      "file_type": "image",
+      "source_file": "web/public/icon-dark-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-dark-32x32_Favicon",
+      "label": "Favicon / Browser Tab Icon",
+      "file_type": "image",
+      "source_file": "web/public/icon-dark-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "icon-dark-32x32_AppIcon",
+      "to": "icon-dark-32x32_VIOLogo",
+      "relation": "DISPLAYS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "The 32x32 icon image visually displays the VIO/V10 logo mark in white on a dark background."
+    },
+    {
+      "from": "icon-dark-32x32_AppIcon",
+      "to": "icon-dark-32x32_DarkTheme",
+      "relation": "IS_VARIANT_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "Filename explicitly includes 'dark', indicating this is the dark-theme variant of the icon."
+    },
+    {
+      "from": "icon-dark-32x32_AppIcon",
+      "to": "icon-dark-32x32_Favicon",
+      "relation": "USED_AS",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "Located in web/public/ at 32x32 pixels, a standard favicon size; likely served as a browser tab icon."
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 512,
+  "output_tokens": 210
+}

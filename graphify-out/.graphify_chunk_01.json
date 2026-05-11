@@ -1,0 +1,226 @@
+{
+  "nodes": [
+    {"id": "readme_goalseek_project", "label": "goalseek Project", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "readme_research_loop", "label": "Research Loop", "file_type": "rationale", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "readme_karpathy_autoresearch", "label": "Karpathy autoresearch Project", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": "https://github.com/karpathy/autoresearch", "captured_at": null, "author": "Karpathy", "contributor": null},
+    {"id": "readme_cli", "label": "goalseek CLI (goalseek.cli.app)", "file_type": "code", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "readme_api", "label": "goalseek API (goalseek.api)", "file_type": "code", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "readme_react_nextjs_ui", "label": "React Next JS UI", "file_type": "code", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "readme_docusaurus_site", "label": "Docusaurus Documentation Site", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": "https://shambhu112.github.io/goalseek/", "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "wiki_loop_engine", "label": "LoopEngine (goalseek.core.loop)", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_step_engine", "label": "StepEngine", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_manifest_yaml", "label": "Manifest (manifest.yaml)", "file_type": "document", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_provider_adapter", "label": "ProviderAdapter (goalseek.providers.base)", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_claude_code_provider", "label": "ClaudeCodeProvider", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_gemini_provider", "label": "GeminiProvider", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_fake_provider", "label": "FakeProvider (Testing)", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_state_store", "label": "StateStore (logs/state.json)", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_artifact_store", "label": "ArtifactStore", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_baseline_runner", "label": "BaselineRunner (goalseek.api.run_baseline)", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_direction_service", "label": "DirectionService", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_project_service", "label": "ProjectService", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_manifest_service", "label": "ManifestService", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_context_reader", "label": "ContextReader", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_verification_runner", "label": "VerificationRunner", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_git_repo", "label": "Git Repository (goalseek.core.git.Repo)", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_summary_service", "label": "SummaryService", "file_type": "code", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_results_jsonl", "label": "logs/results.jsonl (Append-Only Results Log)", "file_type": "document", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_directions_jsonl", "label": "logs/directions.jsonl", "file_type": "document", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "wiki_runs_dir", "label": "runs/ (Per-Iteration Artifact Directory)", "file_type": "document", "source_file": "project-wiki.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "loop_phases_read_context", "label": "READ_CONTEXT Phase", "file_type": "rationale", "source_file": "docs/loop_engine_phases.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "loop_phases_plan", "label": "PLAN Phase", "file_type": "rationale", "source_file": "docs/loop_engine_phases.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "loop_phases_apply_change", "label": "APPLY_CHANGE Phase", "file_type": "rationale", "source_file": "docs/loop_engine_phases.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "loop_phases_commit", "label": "COMMIT Phase", "file_type": "rationale", "source_file": "docs/loop_engine_phases.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "loop_phases_verify", "label": "VERIFY Phase", "file_type": "rationale", "source_file": "docs/loop_engine_phases.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "loop_phases_decide", "label": "DECIDE Phase", "file_type": "rationale", "source_file": "docs/loop_engine_phases.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "loop_phases_log", "label": "LOG Phase", "file_type": "rationale", "source_file": "docs/loop_engine_phases.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "arch_git_backed_audit_trail", "label": "Git-Backed Audit Trail", "file_type": "rationale", "source_file": "docs/system_architecture.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "arch_scope_enforcement", "label": "Scope Enforcement (writable/read_only/hidden/generated)", "file_type": "rationale", "source_file": "docs/system_architecture.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "arch_metric_extraction", "label": "Metric Extraction (json_file/stdout_regex/stderr_regex)", "file_type": "rationale", "source_file": "docs/system_architecture.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "readme_old_manifest_modes", "label": "Manifest File Modes (read_only/writable/generated/hidden)", "file_type": "rationale", "source_file": "docs/readme-old.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "readme_old_loop_state", "label": "Loop State (logs/state.json Fields)", "file_type": "rationale", "source_file": "docs/readme-old.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "step_exp_baseline_flow", "label": "Baseline Execution Flow", "file_type": "rationale", "source_file": "docs/step_by_step_explaination.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "step_exp_iteration_outcomes", "label": "Iteration Outcomes (kept/reverted/skipped)", "file_type": "rationale", "source_file": "docs/step_by_step_explaination.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "step_exp_git_centrality", "label": "Git as Central Experiment Control Mechanism", "file_type": "rationale", "source_file": "docs/step_by_step_explaination.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "step_exp_stagnation_detection", "label": "Stagnation Detection (3 consecutive non-kept)", "file_type": "rationale", "source_file": "docs/step_by_step_explaination.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "docssite_docusaurus", "label": "Docusaurus Docs Site", "file_type": "document", "source_file": "docs-site/README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "agentspec_goalseek_spec", "label": "goalseek Agent-Ready Implementation Specification", "file_type": "document", "source_file": "tasks/agent-spec.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "agentspec_provider_protocol", "label": "ProviderAdapter Protocol (plan/implement/capabilities)", "file_type": "rationale", "source_file": "tasks/agent-spec.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "agentspec_nonneg_rules", "label": "Non-Negotiable Product Invariants", "file_type": "rationale", "source_file": "tasks/agent-spec.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "agentspec_codex_provider", "label": "CodexProvider", "file_type": "code", "source_file": "tasks/agent-spec.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "agentspec_opencode_provider", "label": "OpencodeProvider", "file_type": "code", "source_file": "tasks/agent-spec.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "agentspec_error_hierarchy", "label": "Error Hierarchy (ManifestValidationError, GitOperationError, etc.)", "file_type": "rationale", "source_file": "tasks/agent-spec.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "agentspec_project_scaffold", "label": "Project Scaffold Layout", "file_type": "rationale", "source_file": "tasks/agent-spec.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "agentspec_impl_order", "label": "Implementation Order (Phases 1-6)", "file_type": "rationale", "source_file": "tasks/agent-spec.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "testpkg_program_self_improving", "label": "Self-Improving System Program (test-package)", "file_type": "document", "source_file": "test-package/program.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "testpkg_experiment_py", "label": "experiment.py (writable ML code)", "file_type": "code", "source_file": "test-package/program.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "testpkg_validate_results", "label": "validate_results.py (verification script)", "file_type": "code", "source_file": "test-package/program.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "data_dict_irrigation_dataset", "label": "Irrigation Need Dataset (Kaggle S6E4)", "file_type": "document", "source_file": "test-package/context/data_dictionary.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "data_dict_irrigation_need_target", "label": "Irrigation_Need (Target Variable: Low/Medium/High)", "file_type": "rationale", "source_file": "test-package/context/data_dictionary.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "data_dict_class_imbalance", "label": "Class Imbalance (High class ~3.3%, 18x rarer than Low)", "file_type": "rationale", "source_file": "test-package/context/data_dictionary.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "overview_kaggle_s6e4", "label": "Kaggle Playground Series S6E4 — Irrigation Prediction", "file_type": "document", "source_file": "test-package/context/overview.md", "source_location": null, "source_url": "https://www.kaggle.com/competitions/playground-series-s6e4/overview", "captured_at": null, "author": null, "contributor": null},
+    {"id": "overview_balanced_accuracy", "label": "Balanced Accuracy (Evaluation Metric)", "file_type": "rationale", "source_file": "test-package/context/overview.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "setup_prompt_hidden_rule", "label": "Hidden File Access Rule (never read hidden/*)", "file_type": "rationale", "source_file": "test-package/context/setup_prompt.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "create_setup_train_test_split", "label": "Setup: Train/Test Split from master.csv (70/30)", "file_type": "rationale", "source_file": "test-package/hidden/create_setup.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+
+    {"id": "kaggle_demo_step_by_step", "label": "Kaggle Demo Step-by-Step Guide", "file_type": "document", "source_file": "docs/kaggle_demo_step_by_step.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null},
+    {"id": "kaggle_demo_move_testpackage", "label": "move-testpackage.sh Script", "file_type": "code", "source_file": "docs/kaggle_demo_step_by_step.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}
+  ],
+  "edges": [
+    {"source": "readme_goalseek_project", "target": "readme_karpathy_autoresearch", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_goalseek_project", "target": "readme_research_loop", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_goalseek_project", "target": "readme_cli", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_goalseek_project", "target": "readme_api", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_goalseek_project", "target": "readme_react_nextjs_ui", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_goalseek_project", "target": "readme_docusaurus_site", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_cli", "target": "readme_api", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_api", "target": "wiki_loop_engine", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "wiki_step_engine", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_step_engine", "target": "wiki_git_repo", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_step_engine", "target": "wiki_state_store", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_step_engine", "target": "wiki_manifest_yaml", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_step_engine", "target": "wiki_claude_code_provider", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_step_engine", "target": "wiki_gemini_provider", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_step_engine", "target": "wiki_fake_provider", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_claude_code_provider", "target": "wiki_provider_adapter", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_gemini_provider", "target": "wiki_provider_adapter", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_fake_provider", "target": "wiki_provider_adapter", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_artifact_store", "target": "wiki_results_jsonl", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_artifact_store", "target": "wiki_runs_dir", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_state_store", "target": "readme_old_loop_state", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/readme-old.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_api", "target": "wiki_baseline_runner", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_api", "target": "wiki_direction_service", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_api", "target": "wiki_project_service", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_api", "target": "wiki_manifest_service", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "wiki_context_reader", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "wiki_verification_runner", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "wiki_artifact_store", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "wiki_summary_service", "relation": "calls", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_direction_service", "target": "wiki_directions_jsonl", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+
+    {"source": "wiki_loop_engine", "target": "loop_phases_read_context", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "loop_phases_plan", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "loop_phases_apply_change", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "loop_phases_commit", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "loop_phases_verify", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "loop_phases_decide", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_loop_engine", "target": "loop_phases_log", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+
+    {"source": "loop_phases_plan", "target": "wiki_provider_adapter", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "loop_phases_apply_change", "target": "wiki_provider_adapter", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "loop_phases_verify", "target": "wiki_verification_runner", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "loop_phases_commit", "target": "wiki_git_repo", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "loop_phases_decide", "target": "wiki_git_repo", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "loop_phases_log", "target": "wiki_artifact_store", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "loop_phases_apply_change", "target": "arch_scope_enforcement", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+    {"source": "loop_phases_verify", "target": "arch_metric_extraction", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/loop_engine_phases.md", "source_location": null, "weight": 1.0},
+
+    {"source": "wiki_manifest_yaml", "target": "readme_old_manifest_modes", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/readme-old.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_manifest_yaml", "target": "arch_scope_enforcement", "relation": "rationale_for", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/system_architecture.md", "source_location": null, "weight": 1.0},
+
+    {"source": "step_exp_baseline_flow", "target": "wiki_baseline_runner", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/step_by_step_explaination.md", "source_location": null, "weight": 1.0},
+    {"source": "step_exp_baseline_flow", "target": "wiki_verification_runner", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/step_by_step_explaination.md", "source_location": null, "weight": 1.0},
+    {"source": "step_exp_iteration_outcomes", "target": "loop_phases_decide", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/step_by_step_explaination.md", "source_location": null, "weight": 1.0},
+    {"source": "step_exp_git_centrality", "target": "arch_git_backed_audit_trail", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/step_by_step_explaination.md", "source_location": null, "weight": 1.0},
+    {"source": "step_exp_stagnation_detection", "target": "loop_phases_plan", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/step_by_step_explaination.md", "source_location": null, "weight": 1.0},
+    {"source": "arch_git_backed_audit_trail", "target": "wiki_git_repo", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/system_architecture.md", "source_location": null, "weight": 1.0},
+
+    {"source": "docssite_docusaurus", "target": "readme_docusaurus_site", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs-site/README.md", "source_location": null, "weight": 1.0},
+
+    {"source": "agentspec_goalseek_spec", "target": "readme_goalseek_project", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_goalseek_spec", "target": "agentspec_provider_protocol", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_goalseek_spec", "target": "agentspec_nonneg_rules", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_goalseek_spec", "target": "agentspec_project_scaffold", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_goalseek_spec", "target": "agentspec_error_hierarchy", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_goalseek_spec", "target": "agentspec_impl_order", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_provider_protocol", "target": "wiki_provider_adapter", "relation": "rationale_for", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_codex_provider", "target": "wiki_provider_adapter", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_opencode_provider", "target": "wiki_provider_adapter", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_nonneg_rules", "target": "arch_git_backed_audit_trail", "relation": "rationale_for", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_nonneg_rules", "target": "arch_scope_enforcement", "relation": "rationale_for", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_project_scaffold", "target": "wiki_manifest_yaml", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+    {"source": "agentspec_project_scaffold", "target": "testpkg_experiment_py", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "tasks/agent-spec.md", "source_location": null, "weight": 1.0},
+
+    {"source": "testpkg_program_self_improving", "target": "testpkg_experiment_py", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/program.md", "source_location": null, "weight": 1.0},
+    {"source": "testpkg_program_self_improving", "target": "testpkg_validate_results", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/program.md", "source_location": null, "weight": 1.0},
+    {"source": "testpkg_program_self_improving", "target": "readme_karpathy_autoresearch", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/program.md", "source_location": null, "weight": 1.0},
+    {"source": "testpkg_validate_results", "target": "wiki_verification_runner", "relation": "semantically_similar_to", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "test-package/program.md", "source_location": null, "weight": 1.0},
+
+    {"source": "data_dict_irrigation_dataset", "target": "data_dict_irrigation_need_target", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/context/data_dictionary.md", "source_location": null, "weight": 1.0},
+    {"source": "data_dict_irrigation_dataset", "target": "data_dict_class_imbalance", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/context/data_dictionary.md", "source_location": null, "weight": 1.0},
+    {"source": "overview_kaggle_s6e4", "target": "data_dict_irrigation_dataset", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/context/overview.md", "source_location": null, "weight": 1.0},
+    {"source": "overview_kaggle_s6e4", "target": "overview_balanced_accuracy", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/context/overview.md", "source_location": null, "weight": 1.0},
+    {"source": "overview_balanced_accuracy", "target": "arch_metric_extraction", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.75, "source_file": "test-package/context/overview.md", "source_location": null, "weight": 1.0},
+
+    {"source": "setup_prompt_hidden_rule", "target": "readme_old_manifest_modes", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/context/setup_prompt.md", "source_location": null, "weight": 1.0},
+    {"source": "setup_prompt_hidden_rule", "target": "arch_scope_enforcement", "relation": "rationale_for", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "test-package/context/setup_prompt.md", "source_location": null, "weight": 1.0},
+
+    {"source": "create_setup_train_test_split", "target": "data_dict_irrigation_dataset", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "test-package/hidden/create_setup.md", "source_location": null, "weight": 1.0},
+
+    {"source": "kaggle_demo_step_by_step", "target": "overview_kaggle_s6e4", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/kaggle_demo_step_by_step.md", "source_location": null, "weight": 1.0},
+    {"source": "kaggle_demo_step_by_step", "target": "kaggle_demo_move_testpackage", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/kaggle_demo_step_by_step.md", "source_location": null, "weight": 1.0},
+    {"source": "kaggle_demo_step_by_step", "target": "wiki_manifest_yaml", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/kaggle_demo_step_by_step.md", "source_location": null, "weight": 1.0},
+    {"source": "kaggle_demo_step_by_step", "target": "step_exp_baseline_flow", "relation": "references", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "docs/kaggle_demo_step_by_step.md", "source_location": null, "weight": 1.0},
+
+    {"source": "readme_research_loop", "target": "wiki_loop_engine", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "readme_research_loop", "target": "readme_karpathy_autoresearch", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0},
+
+    {"source": "arch_scope_enforcement", "target": "readme_old_manifest_modes", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.95, "source_file": "docs/system_architecture.md", "source_location": null, "weight": 1.0},
+    {"source": "step_exp_iteration_outcomes", "target": "agentspec_nonneg_rules", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.75, "source_file": "docs/step_by_step_explaination.md", "source_location": null, "weight": 1.0},
+
+    {"source": "wiki_step_engine", "target": "readme_old_loop_state", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/readme-old.md", "source_location": null, "weight": 1.0},
+
+    {"source": "wiki_manifest_service", "target": "wiki_manifest_yaml", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_context_reader", "target": "wiki_manifest_yaml", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+    {"source": "wiki_verification_runner", "target": "wiki_manifest_yaml", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "project-wiki.md", "source_location": null, "weight": 1.0},
+
+    {"source": "wiki_loop_engine", "target": "arch_git_backed_audit_trail", "relation": "implements", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "docs/system_architecture.md", "source_location": null, "weight": 1.0},
+
+    {"source": "readme_research_loop", "target": "step_exp_git_centrality", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "docs/step_by_step_explaination.md", "source_location": null, "weight": 1.0},
+
+    {"source": "testpkg_program_self_improving", "target": "overview_kaggle_s6e4", "relation": "references", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "test-package/program.md", "source_location": null, "weight": 1.0}
+  ],
+  "hyperedges": [
+    {
+      "id": "seven_phase_research_loop",
+      "label": "Seven-Phase Research Loop (READ_CONTEXT→PLAN→APPLY→COMMIT→VERIFY→DECIDE→LOG)",
+      "nodes": ["wiki_loop_engine", "wiki_step_engine", "loop_phases_read_context", "loop_phases_plan", "loop_phases_apply_change", "loop_phases_commit", "loop_phases_verify", "loop_phases_decide", "loop_phases_log"],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md"
+    },
+    {
+      "id": "provider_ecosystem",
+      "label": "Provider Ecosystem (Claude/Gemini/Codex/Opencode/Fake implement ProviderAdapter)",
+      "nodes": ["wiki_provider_adapter", "wiki_claude_code_provider", "wiki_gemini_provider", "wiki_fake_provider", "agentspec_codex_provider", "agentspec_opencode_provider"],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md"
+    },
+    {
+      "id": "kaggle_test_package_scenario",
+      "label": "Kaggle Irrigation Prediction Test Scenario (dataset + experiment + validation)",
+      "nodes": ["overview_kaggle_s6e4", "data_dict_irrigation_dataset", "testpkg_experiment_py", "testpkg_validate_results", "overview_balanced_accuracy"],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "test-package/context/overview.md"
+    }
+  ],
+  "input_tokens": 18500,
+  "output_tokens": 4200
+}

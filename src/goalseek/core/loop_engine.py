@@ -341,31 +341,38 @@ class LoopEngine:
         state: LoopState,
         config,
     ) -> LoopState:
-        repo.ensure_clean()
-        provider_config = config.provider.implementation
-        provider = self.provider_registry.get(provider_config.name)
-        response = provider.implement(
-            ProviderRequest(
-                project_root=root,
-                provider_name=provider_config.name,
-                model_name=provider_config.model,
-                mode="implementation",
-                prompt_text=build_implementation_prompt(scope, state.iteration_data.plan_text or "", state.current_iteration),
-                writable_paths=scope.writable_patterns,
-                generated_paths=scope.generated_patterns,
-                non_interactive=provider_config.non_interactive,
-                timeout_sec=provider_config.timeout_sec,
-                iteration=state.current_iteration,
-            )
-        )
-        state.iteration_data.provider_output = (state.iteration_data.provider_output or "") + "\n\n" + response.raw_text
-        if response.exit_code != 0:
-            state.iteration_data.notes = response.error or "provider implementation failed"
-            state.iteration_data.decision_outcome = "skipped_provider_failure"
-            state.current_phase = LoopPhase.LOG
-            logger.warning("Implementation failed for iteration=%s: %s", state.current_iteration, state.iteration_data.notes)
-            return state
         changed_files = repo.working_tree_changed_files()
+        if changed_files:
+            logger.info(
+                "Resuming apply phase with %s existing changed file(s) for iteration=%s",
+                len(changed_files),
+                state.current_iteration,
+            )
+        else:
+            provider_config = config.provider.implementation
+            provider = self.provider_registry.get(provider_config.name)
+            response = provider.implement(
+                ProviderRequest(
+                    project_root=root,
+                    provider_name=provider_config.name,
+                    model_name=provider_config.model,
+                    mode="implementation",
+                    prompt_text=build_implementation_prompt(scope, state.iteration_data.plan_text or "", state.current_iteration),
+                    writable_paths=scope.writable_patterns,
+                    generated_paths=scope.generated_patterns,
+                    non_interactive=provider_config.non_interactive,
+                    timeout_sec=provider_config.timeout_sec,
+                    iteration=state.current_iteration,
+                )
+            )
+            state.iteration_data.provider_output = (state.iteration_data.provider_output or "") + "\n\n" + response.raw_text
+            if response.exit_code != 0:
+                state.iteration_data.notes = response.error or "provider implementation failed"
+                state.iteration_data.decision_outcome = "skipped_provider_failure"
+                state.current_phase = LoopPhase.LOG
+                logger.warning("Implementation failed for iteration=%s: %s", state.current_iteration, state.iteration_data.notes)
+                return state
+            changed_files = repo.working_tree_changed_files()
         if not changed_files:
             state.iteration_data.changed_files = []
             state.iteration_data.decision_outcome = "skipped_no_change"

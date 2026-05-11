@@ -1,0 +1,330 @@
+{
+  "nodes": [
+    {
+      "id": "goalseekpng_goalseek_iteration_loop",
+      "label": "GoalSeek Iteration Loop",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_define_problem",
+      "label": "Define Problem",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_initial_guess",
+      "label": "Initial Guess",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_calculate_output",
+      "label": "Calculate Output",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_compare_evaluate",
+      "label": "Compare & Evaluate",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_adjust_input",
+      "label": "Adjust Input",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_terminate",
+      "label": "Terminate",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_input_variable",
+      "label": "Input Variable",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_target_value",
+      "label": "Target Value",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_computation",
+      "label": "Computation",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_optimization_algorithm",
+      "label": "Optimization Algorithm",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_define_problem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_initial_guess",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_calculate_output",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_compare_evaluate",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_adjust_input",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_terminate",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_initial_guess",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_initial_guess",
+      "target": "goalseekpng_calculate_output",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_calculate_output",
+      "target": "goalseekpng_compare_evaluate",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_adjust_input",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_adjust_input",
+      "target": "goalseekpng_calculate_output",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_terminate",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_input_variable",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_target_value",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_computation",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_optimization_algorithm",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "goalseekpng_adjust_input",
+      "target": "goalseekpng_optimization_algorithm",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_target_value",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "goalseekpng_calculate_output",
+      "target": "goalseekpng_computation",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "goalseekpng_adjust_input",
+      "target": "goalseekpng_input_variable",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

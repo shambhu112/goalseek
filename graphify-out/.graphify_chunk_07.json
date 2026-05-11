@@ -1,0 +1,208 @@
+{
+  "nodes": [
+    {
+      "id": "icon_goalseek_app_icon",
+      "label": "GoalSeek App Icon",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_logomark",
+      "label": "GoalSeek Logomark (GS Brand Symbol)",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_rounded_rect_background",
+      "label": "Rounded Rectangle Background Shape",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_left_glyph_path",
+      "label": "Left Glyph Path (Y-like shape)",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_right_glyph_path",
+      "label": "Right Glyph Path (S/Z-like shape)",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_adaptive_color_scheme",
+      "label": "Adaptive Color Scheme (Dark/Light Mode)",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_svg_format",
+      "label": "SVG Vector Format",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_web_public_assets",
+      "label": "Web Public Assets Directory",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_logomark",
+      "relation": "CONTAINS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "The SVG icon file contains the GoalSeek logomark composed of two glyph paths"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_rounded_rect_background",
+      "relation": "CONTAINS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "The icon has a 180x180 rounded rectangle (rx=37) as background"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_adaptive_color_scheme",
+      "relation": "USES",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "SVG uses CSS media query prefers-color-scheme to invert colors between light and dark modes"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_svg_format",
+      "relation": "ENCODED_AS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "File is an SVG vector graphic with viewBox 0 0 180 180"
+    },
+    {
+      "from": "icon_logomark",
+      "to": "icon_left_glyph_path",
+      "relation": "COMPOSED_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "Logomark is composed of left glyph path (Y-like shape starting at x=14)"
+    },
+    {
+      "from": "icon_logomark",
+      "to": "icon_right_glyph_path",
+      "relation": "COMPOSED_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "Logomark is composed of right glyph path (S/Z-like shape starting at x=101)"
+    },
+    {
+      "from": "icon_left_glyph_path",
+      "to": "icon_right_glyph_path",
+      "relation": "PAIRED_WITH",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "The two paths form a unified brand symbol together, both scaled at 95% from center"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_web_public_assets",
+      "relation": "BELONGS_TO",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "File is located in web/public/ directory which serves static web assets"
+    },
+    {
+      "from": "icon_adaptive_color_scheme",
+      "to": "icon_rounded_rect_background",
+      "relation": "CONTROLS_STYLE_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "CSS .background class fill is black in light mode and white in dark mode"
+    },
+    {
+      "from": "icon_adaptive_color_scheme",
+      "to": "icon_logomark",
+      "relation": "CONTROLS_STYLE_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "CSS .foreground class fill is white in light mode and black in dark mode, applied to glyph paths"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_logomark",
+      "relation": "REPRESENTS_BRAND",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "Icon serves as the brand/app identity symbol for the GoalSeek application"
+    },
+    {
+      "from": "icon_svg_format",
+      "to": "icon_web_public_assets",
+      "relation": "SUITABLE_FOR",
+      "provenance": "INFERRED",
+      "confidence_score": 0.85,
+      "note": "SVG format is resolution-independent and well-suited for web favicon/icon use"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "hyperedge_icon_composition",
+      "label": "Icon Visual Composition",
+      "members": [
+        "icon_rounded_rect_background",
+        "icon_left_glyph_path",
+        "icon_right_glyph_path",
+        "icon_adaptive_color_scheme"
+      ],
+      "relation": "JOINTLY_COMPOSE",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "Background rect, two foreground glyph paths, and adaptive color scheme jointly compose the GoalSeek app icon"
+    }
+  ],
+  "input_tokens": 420,
+  "output_tokens": 680
+}

@@ -1,0 +1,2733 @@
+{
+  "nodes": [
+    {
+      "id": "readme_goalseek_project",
+      "label": "goalseek Project",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_research_loop",
+      "label": "Research Loop",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_karpathy_autoresearch",
+      "label": "Karpathy autoresearch Project",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": "https://github.com/karpathy/autoresearch",
+      "captured_at": null,
+      "author": "Karpathy",
+      "contributor": null
+    },
+    {
+      "id": "readme_cli",
+      "label": "goalseek CLI (goalseek.cli.app)",
+      "file_type": "code",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_api",
+      "label": "goalseek API (goalseek.api)",
+      "file_type": "code",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_react_nextjs_ui",
+      "label": "React Next JS UI",
+      "file_type": "code",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_docusaurus_site",
+      "label": "Docusaurus Documentation Site",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": "https://shambhu112.github.io/goalseek/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_loop_engine",
+      "label": "LoopEngine (goalseek.core.loop)",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_step_engine",
+      "label": "StepEngine",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_manifest_yaml",
+      "label": "Manifest (manifest.yaml)",
+      "file_type": "document",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_provider_adapter",
+      "label": "ProviderAdapter (goalseek.providers.base)",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_claude_code_provider",
+      "label": "ClaudeCodeProvider",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_gemini_provider",
+      "label": "GeminiProvider",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_fake_provider",
+      "label": "FakeProvider (Testing)",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_state_store",
+      "label": "StateStore (logs/state.json)",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_artifact_store",
+      "label": "ArtifactStore",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_baseline_runner",
+      "label": "BaselineRunner (goalseek.api.run_baseline)",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_direction_service",
+      "label": "DirectionService",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_project_service",
+      "label": "ProjectService",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_manifest_service",
+      "label": "ManifestService",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_context_reader",
+      "label": "ContextReader",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_verification_runner",
+      "label": "VerificationRunner",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_git_repo",
+      "label": "Git Repository (goalseek.core.git.Repo)",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_summary_service",
+      "label": "SummaryService",
+      "file_type": "code",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_results_jsonl",
+      "label": "logs/results.jsonl (Append-Only Results Log)",
+      "file_type": "document",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_directions_jsonl",
+      "label": "logs/directions.jsonl",
+      "file_type": "document",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wiki_runs_dir",
+      "label": "runs/ (Per-Iteration Artifact Directory)",
+      "file_type": "document",
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "loop_phases_read_context",
+      "label": "READ_CONTEXT Phase",
+      "file_type": "rationale",
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "loop_phases_plan",
+      "label": "PLAN Phase",
+      "file_type": "rationale",
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "loop_phases_apply_change",
+      "label": "APPLY_CHANGE Phase",
+      "file_type": "rationale",
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "loop_phases_commit",
+      "label": "COMMIT Phase",
+      "file_type": "rationale",
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "loop_phases_verify",
+      "label": "VERIFY Phase",
+      "file_type": "rationale",
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "loop_phases_decide",
+      "label": "DECIDE Phase",
+      "file_type": "rationale",
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "loop_phases_log",
+      "label": "LOG Phase",
+      "file_type": "rationale",
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "arch_git_backed_audit_trail",
+      "label": "Git-Backed Audit Trail",
+      "file_type": "rationale",
+      "source_file": "docs/system_architecture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "arch_scope_enforcement",
+      "label": "Scope Enforcement (writable/read_only/hidden/generated)",
+      "file_type": "rationale",
+      "source_file": "docs/system_architecture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "arch_metric_extraction",
+      "label": "Metric Extraction (json_file/stdout_regex/stderr_regex)",
+      "file_type": "rationale",
+      "source_file": "docs/system_architecture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_old_manifest_modes",
+      "label": "Manifest File Modes (read_only/writable/generated/hidden)",
+      "file_type": "rationale",
+      "source_file": "docs/readme-old.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_old_loop_state",
+      "label": "Loop State (logs/state.json Fields)",
+      "file_type": "rationale",
+      "source_file": "docs/readme-old.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "step_exp_baseline_flow",
+      "label": "Baseline Execution Flow",
+      "file_type": "rationale",
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "step_exp_iteration_outcomes",
+      "label": "Iteration Outcomes (kept/reverted/skipped)",
+      "file_type": "rationale",
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "step_exp_git_centrality",
+      "label": "Git as Central Experiment Control Mechanism",
+      "file_type": "rationale",
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "step_exp_stagnation_detection",
+      "label": "Stagnation Detection (3 consecutive non-kept)",
+      "file_type": "rationale",
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docssite_docusaurus",
+      "label": "Docusaurus Docs Site",
+      "file_type": "document",
+      "source_file": "docs-site/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agentspec_goalseek_spec",
+      "label": "goalseek Agent-Ready Implementation Specification",
+      "file_type": "document",
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agentspec_provider_protocol",
+      "label": "ProviderAdapter Protocol (plan/implement/capabilities)",
+      "file_type": "rationale",
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agentspec_nonneg_rules",
+      "label": "Non-Negotiable Product Invariants",
+      "file_type": "rationale",
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agentspec_codex_provider",
+      "label": "CodexProvider",
+      "file_type": "code",
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agentspec_opencode_provider",
+      "label": "OpencodeProvider",
+      "file_type": "code",
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agentspec_error_hierarchy",
+      "label": "Error Hierarchy (ManifestValidationError, GitOperationError, etc.)",
+      "file_type": "rationale",
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agentspec_project_scaffold",
+      "label": "Project Scaffold Layout",
+      "file_type": "rationale",
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agentspec_impl_order",
+      "label": "Implementation Order (Phases 1-6)",
+      "file_type": "rationale",
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "testpkg_program_self_improving",
+      "label": "Self-Improving System Program (test-package)",
+      "file_type": "document",
+      "source_file": "test-package/program.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "testpkg_experiment_py",
+      "label": "experiment.py (writable ML code)",
+      "file_type": "code",
+      "source_file": "test-package/program.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "testpkg_validate_results",
+      "label": "validate_results.py (verification script)",
+      "file_type": "code",
+      "source_file": "test-package/program.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "data_dict_irrigation_dataset",
+      "label": "Irrigation Need Dataset (Kaggle S6E4)",
+      "file_type": "document",
+      "source_file": "test-package/context/data_dictionary.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "data_dict_irrigation_need_target",
+      "label": "Irrigation_Need (Target Variable: Low/Medium/High)",
+      "file_type": "rationale",
+      "source_file": "test-package/context/data_dictionary.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "data_dict_class_imbalance",
+      "label": "Class Imbalance (High class ~3.3%, 18x rarer than Low)",
+      "file_type": "rationale",
+      "source_file": "test-package/context/data_dictionary.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "overview_kaggle_s6e4",
+      "label": "Kaggle Playground Series S6E4 \u00e2\u20ac\u201d Irrigation Prediction",
+      "file_type": "document",
+      "source_file": "test-package/context/overview.md",
+      "source_location": null,
+      "source_url": "https://www.kaggle.com/competitions/playground-series-s6e4/overview",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "overview_balanced_accuracy",
+      "label": "Balanced Accuracy (Evaluation Metric)",
+      "file_type": "rationale",
+      "source_file": "test-package/context/overview.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "setup_prompt_hidden_rule",
+      "label": "Hidden File Access Rule (never read hidden/*)",
+      "file_type": "rationale",
+      "source_file": "test-package/context/setup_prompt.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "create_setup_train_test_split",
+      "label": "Setup: Train/Test Split from master.csv (70/30)",
+      "file_type": "rationale",
+      "source_file": "test-package/hidden/create_setup.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "kaggle_demo_step_by_step",
+      "label": "Kaggle Demo Step-by-Step Guide",
+      "file_type": "document",
+      "source_file": "docs/kaggle_demo_step_by_step.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "kaggle_demo_move_testpackage",
+      "label": "move-testpackage.sh Script",
+      "file_type": "code",
+      "source_file": "docs/kaggle_demo_step_by_step.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_goalseek_iteration_loop",
+      "label": "GoalSeek Iteration Loop",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_define_problem",
+      "label": "Define Problem",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_initial_guess",
+      "label": "Initial Guess",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_calculate_output",
+      "label": "Calculate Output",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_compare_evaluate",
+      "label": "Compare & Evaluate",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_adjust_input",
+      "label": "Adjust Input",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_terminate",
+      "label": "Terminate",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_target_value",
+      "label": "Target Value",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_input_variable",
+      "label": "Input Variable",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_output_variable",
+      "label": "Output Variable",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_optimization_algorithm",
+      "label": "Optimization Algorithm",
+      "file_type": "image",
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "goalseekpng_computation",
+      "label": "Computation",
+      "file_type": "image",
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "apple-icon_AppleIcon",
+      "label": "Apple Touch Icon (GoalSeek)",
+      "file_type": "image",
+      "source_file": "web/public/apple-icon.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "apple-icon_GoalSeekBrand",
+      "label": "GoalSeek Brand / Logo Mark",
+      "file_type": "image",
+      "source_file": "web/public/apple-icon.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "apple-icon_WebPublicAssets",
+      "label": "Web Public Static Assets",
+      "file_type": "image",
+      "source_file": "web/public/apple-icon.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "apple-icon_GoalSeekWebApp",
+      "label": "GoalSeek Web Application",
+      "file_type": "image",
+      "source_file": "web/public/apple-icon.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-dark-32x32_AppIcon",
+      "label": "App Dark Icon (32x32)",
+      "file_type": "image",
+      "source_file": "web/public/icon-dark-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-dark-32x32_VIOLogo",
+      "label": "VIO / V10 Logo Mark",
+      "file_type": "image",
+      "source_file": "web/public/icon-dark-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-dark-32x32_DarkTheme",
+      "label": "Dark Theme Variant",
+      "file_type": "image",
+      "source_file": "web/public/icon-dark-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-dark-32x32_Favicon",
+      "label": "Favicon / Browser Tab Icon",
+      "file_type": "image",
+      "source_file": "web/public/icon-dark-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-light-32x32_AppIcon",
+      "label": "GoalSeek App Icon (Light, 32x32)",
+      "file_type": "image",
+      "source_file": "web/public/icon-light-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-light-32x32_v0Logotype",
+      "label": "v0 Logotype",
+      "file_type": "image",
+      "source_file": "web/public/icon-light-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-light-32x32_LightThemeVariant",
+      "label": "Light Theme Icon Variant",
+      "file_type": "image",
+      "source_file": "web/public/icon-light-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon-light-32x32_WebPublicAsset",
+      "label": "Web Public Static Asset",
+      "file_type": "image",
+      "source_file": "web/public/icon-light-32x32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_goalseek_app_icon",
+      "label": "GoalSeek App Icon",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_logomark",
+      "label": "GoalSeek Logomark (GS Brand Symbol)",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_rounded_rect_background",
+      "label": "Rounded Rectangle Background Shape",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_left_glyph_path",
+      "label": "Left Glyph Path (Y-like shape)",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_right_glyph_path",
+      "label": "Right Glyph Path (S/Z-like shape)",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_adaptive_color_scheme",
+      "label": "Adaptive Color Scheme (Dark/Light Mode)",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_svg_format",
+      "label": "SVG Vector Format",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "icon_web_public_assets",
+      "label": "Web Public Assets Directory",
+      "file_type": "image",
+      "source_file": "web/public/icon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "placeholder_logo_placeholderlogo",
+      "label": "Placeholder Logo (Dotted Triangle)",
+      "file_type": "image",
+      "source_file": "web/public/placeholder-logo.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "placeholder-logo_PlaceholderLogo",
+      "label": "Placeholder Logo (Acmelnc Brand Template)",
+      "file_type": "image",
+      "source_file": "web/public/placeholder-logo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "placeholderuser_PlaceholderUserAvatar",
+      "label": "Placeholder User Avatar",
+      "file_type": "image",
+      "source_file": "web/public/placeholder-user.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "placeholder_placeholder",
+      "label": "Placeholder Image",
+      "file_type": "image",
+      "source_file": "web/public/placeholder.jpg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "placeholder_PlaceholderImage",
+      "label": "Placeholder Image",
+      "file_type": "image",
+      "source_file": "web/public/placeholder.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "readme_goalseek_project",
+      "target": "readme_karpathy_autoresearch",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_goalseek_project",
+      "target": "readme_research_loop",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_goalseek_project",
+      "target": "readme_cli",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_goalseek_project",
+      "target": "readme_api",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_goalseek_project",
+      "target": "readme_react_nextjs_ui",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_goalseek_project",
+      "target": "readme_docusaurus_site",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_cli",
+      "target": "readme_api",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_api",
+      "target": "wiki_loop_engine",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "wiki_step_engine",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_step_engine",
+      "target": "wiki_git_repo",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_step_engine",
+      "target": "wiki_state_store",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_step_engine",
+      "target": "wiki_manifest_yaml",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_step_engine",
+      "target": "wiki_claude_code_provider",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_step_engine",
+      "target": "wiki_gemini_provider",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_step_engine",
+      "target": "wiki_fake_provider",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_claude_code_provider",
+      "target": "wiki_provider_adapter",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_gemini_provider",
+      "target": "wiki_provider_adapter",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_fake_provider",
+      "target": "wiki_provider_adapter",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_artifact_store",
+      "target": "wiki_results_jsonl",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_artifact_store",
+      "target": "wiki_runs_dir",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_state_store",
+      "target": "readme_old_loop_state",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/readme-old.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_api",
+      "target": "wiki_baseline_runner",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_api",
+      "target": "wiki_direction_service",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_api",
+      "target": "wiki_project_service",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_api",
+      "target": "wiki_manifest_service",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "wiki_context_reader",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "wiki_verification_runner",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "wiki_artifact_store",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "wiki_summary_service",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_direction_service",
+      "target": "wiki_directions_jsonl",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "loop_phases_read_context",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "loop_phases_plan",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "loop_phases_apply_change",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "loop_phases_commit",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "loop_phases_verify",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "loop_phases_decide",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "loop_phases_log",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "loop_phases_plan",
+      "target": "wiki_provider_adapter",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "loop_phases_apply_change",
+      "target": "wiki_provider_adapter",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "loop_phases_verify",
+      "target": "wiki_verification_runner",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "loop_phases_commit",
+      "target": "wiki_git_repo",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "loop_phases_decide",
+      "target": "wiki_git_repo",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "loop_phases_log",
+      "target": "wiki_artifact_store",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "loop_phases_apply_change",
+      "target": "arch_scope_enforcement",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "loop_phases_verify",
+      "target": "arch_metric_extraction",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_manifest_yaml",
+      "target": "readme_old_manifest_modes",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/readme-old.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_manifest_yaml",
+      "target": "arch_scope_enforcement",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/system_architecture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "step_exp_baseline_flow",
+      "target": "wiki_baseline_runner",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "step_exp_baseline_flow",
+      "target": "wiki_verification_runner",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "step_exp_iteration_outcomes",
+      "target": "loop_phases_decide",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "step_exp_git_centrality",
+      "target": "arch_git_backed_audit_trail",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "step_exp_stagnation_detection",
+      "target": "loop_phases_plan",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "arch_git_backed_audit_trail",
+      "target": "wiki_git_repo",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/system_architecture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docssite_docusaurus",
+      "target": "readme_docusaurus_site",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_goalseek_spec",
+      "target": "readme_goalseek_project",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_goalseek_spec",
+      "target": "agentspec_provider_protocol",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_goalseek_spec",
+      "target": "agentspec_nonneg_rules",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_goalseek_spec",
+      "target": "agentspec_project_scaffold",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_goalseek_spec",
+      "target": "agentspec_error_hierarchy",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_goalseek_spec",
+      "target": "agentspec_impl_order",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_provider_protocol",
+      "target": "wiki_provider_adapter",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_codex_provider",
+      "target": "wiki_provider_adapter",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_opencode_provider",
+      "target": "wiki_provider_adapter",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_nonneg_rules",
+      "target": "arch_git_backed_audit_trail",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_nonneg_rules",
+      "target": "arch_scope_enforcement",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_project_scaffold",
+      "target": "wiki_manifest_yaml",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agentspec_project_scaffold",
+      "target": "testpkg_experiment_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tasks/agent-spec.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "testpkg_program_self_improving",
+      "target": "testpkg_experiment_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/program.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "testpkg_program_self_improving",
+      "target": "testpkg_validate_results",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/program.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "testpkg_program_self_improving",
+      "target": "readme_karpathy_autoresearch",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/program.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "testpkg_validate_results",
+      "target": "wiki_verification_runner",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "test-package/program.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "data_dict_irrigation_dataset",
+      "target": "data_dict_irrigation_need_target",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/context/data_dictionary.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "data_dict_irrigation_dataset",
+      "target": "data_dict_class_imbalance",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/context/data_dictionary.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "overview_kaggle_s6e4",
+      "target": "data_dict_irrigation_dataset",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/context/overview.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "overview_kaggle_s6e4",
+      "target": "overview_balanced_accuracy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/context/overview.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "overview_balanced_accuracy",
+      "target": "arch_metric_extraction",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "test-package/context/overview.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "setup_prompt_hidden_rule",
+      "target": "readme_old_manifest_modes",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/context/setup_prompt.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "setup_prompt_hidden_rule",
+      "target": "arch_scope_enforcement",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "test-package/context/setup_prompt.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "create_setup_train_test_split",
+      "target": "data_dict_irrigation_dataset",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test-package/hidden/create_setup.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "kaggle_demo_step_by_step",
+      "target": "overview_kaggle_s6e4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/kaggle_demo_step_by_step.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "kaggle_demo_step_by_step",
+      "target": "kaggle_demo_move_testpackage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/kaggle_demo_step_by_step.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "kaggle_demo_step_by_step",
+      "target": "wiki_manifest_yaml",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/kaggle_demo_step_by_step.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "kaggle_demo_step_by_step",
+      "target": "step_exp_baseline_flow",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/kaggle_demo_step_by_step.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_research_loop",
+      "target": "wiki_loop_engine",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_research_loop",
+      "target": "readme_karpathy_autoresearch",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "arch_scope_enforcement",
+      "target": "readme_old_manifest_modes",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs/system_architecture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "step_exp_iteration_outcomes",
+      "target": "agentspec_nonneg_rules",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_step_engine",
+      "target": "readme_old_loop_state",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/readme-old.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_manifest_service",
+      "target": "wiki_manifest_yaml",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_context_reader",
+      "target": "wiki_manifest_yaml",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_verification_runner",
+      "target": "wiki_manifest_yaml",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "wiki_loop_engine",
+      "target": "arch_git_backed_audit_trail",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/system_architecture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_research_loop",
+      "target": "step_exp_git_centrality",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/step_by_step_explaination.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "testpkg_program_self_improving",
+      "target": "overview_kaggle_s6e4",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "test-package/program.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_define_problem",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_initial_guess",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_calculate_output",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_compare_evaluate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_adjust_input",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_terminate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_initial_guess",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_initial_guess",
+      "target": "goalseekpng_calculate_output",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_calculate_output",
+      "target": "goalseekpng_compare_evaluate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_adjust_input",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_terminate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_adjust_input",
+      "target": "goalseekpng_calculate_output",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_target_value",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_input_variable",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_output_variable",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_target_value",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_adjust_input",
+      "target": "goalseekpng_optimization_algorithm",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_optimization_algorithm",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "goalseekpng_initial_guess",
+      "target": "goalseekpng_input_variable",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "goalseekpng_calculate_output",
+      "target": "goalseekpng_output_variable",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_define_problem",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_initial_guess",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_calculate_output",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_compare_evaluate",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_adjust_input",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_terminate",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_initial_guess",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_initial_guess",
+      "target": "goalseekpng_calculate_output",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_calculate_output",
+      "target": "goalseekpng_compare_evaluate",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_adjust_input",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_adjust_input",
+      "target": "goalseekpng_calculate_output",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_terminate",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_input_variable",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_target_value",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_define_problem",
+      "target": "goalseekpng_computation",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "goalseekpng_goalseek_iteration_loop",
+      "target": "goalseekpng_optimization_algorithm",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "goalseekpng_adjust_input",
+      "target": "goalseekpng_optimization_algorithm",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "goalseekpng_compare_evaluate",
+      "target": "goalseekpng_target_value",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "goalseekpng_calculate_output",
+      "target": "goalseekpng_computation",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "goalseekpng_adjust_input",
+      "target": "goalseekpng_input_variable",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs-site/static/img/goal-seek.png",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "from": "apple-icon_AppleIcon",
+      "to": "apple-icon_GoalSeekBrand",
+      "relation": "DISPLAYS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "The apple-icon.png file visually displays the GoalSeek monogram logo mark (stylized V+Z letters in white on black background)."
+    },
+    {
+      "from": "apple-icon_AppleIcon",
+      "to": "apple-icon_WebPublicAssets",
+      "relation": "BELONGS_TO",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "File resides at web/public/apple-icon.png, placing it within the web public static assets directory."
+    },
+    {
+      "from": "apple-icon_AppleIcon",
+      "to": "apple-icon_GoalSeekWebApp",
+      "relation": "IS_ICON_FOR",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "Apple touch icons (apple-icon.png in public/) are served as home-screen icons when users add the web app to their iOS device; strongly associated with the GoalSeek web application."
+    },
+    {
+      "from": "apple-icon_GoalSeekBrand",
+      "to": "apple-icon_GoalSeekWebApp",
+      "relation": "REPRESENTS",
+      "provenance": "INFERRED",
+      "confidence_score": 0.85,
+      "note": "The monogram logo mark represents the GoalSeek product brand identity used across the web application."
+    },
+    {
+      "from": "apple-icon_WebPublicAssets",
+      "to": "apple-icon_GoalSeekWebApp",
+      "relation": "SERVES_ASSETS_FOR",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "The web/public directory is the standard static asset root served by the GoalSeek web application."
+    },
+    {
+      "from": "icon-dark-32x32_AppIcon",
+      "to": "icon-dark-32x32_VIOLogo",
+      "relation": "DISPLAYS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "The 32x32 icon image visually displays the VIO/V10 logo mark in white on a dark background."
+    },
+    {
+      "from": "icon-dark-32x32_AppIcon",
+      "to": "icon-dark-32x32_DarkTheme",
+      "relation": "IS_VARIANT_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "Filename explicitly includes 'dark', indicating this is the dark-theme variant of the icon."
+    },
+    {
+      "from": "icon-dark-32x32_AppIcon",
+      "to": "icon-dark-32x32_Favicon",
+      "relation": "USED_AS",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "Located in web/public/ at 32x32 pixels, a standard favicon size; likely served as a browser tab icon."
+    },
+    {
+      "from": "icon-light-32x32_AppIcon",
+      "to": "icon-light-32x32_v0Logotype",
+      "relation": "DISPLAYS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "notes": "The 32x32 icon visually displays the 'v0' logotype in white on a black rounded-square background."
+    },
+    {
+      "from": "icon-light-32x32_AppIcon",
+      "to": "icon-light-32x32_LightThemeVariant",
+      "relation": "IS_VARIANT_OF_THEME",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "notes": "Filename explicitly includes 'light', indicating this is the light-theme variant of the icon."
+    },
+    {
+      "from": "icon-light-32x32_AppIcon",
+      "to": "icon-light-32x32_WebPublicAsset",
+      "relation": "SERVED_AS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "notes": "File resides in web/public/, making it a static web asset served directly to the browser."
+    },
+    {
+      "from": "icon-light-32x32_AppIcon",
+      "to": "icon-light-32x32_AppIcon",
+      "relation": "HAS_DIMENSIONS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "notes": "Filename specifies 32x32 pixel dimensions."
+    },
+    {
+      "from": "icon-light-32x32_v0Logotype",
+      "to": "icon-light-32x32_AppIcon",
+      "relation": "IDENTIFIES",
+      "provenance": "INFERRED",
+      "confidence_score": 0.85,
+      "notes": "'v0' likely refers to the GoalSeek application branding or a versioning convention used as the product identity mark."
+    },
+    {
+      "from": "icon-light-32x32_LightThemeVariant",
+      "to": "icon-light-32x32_WebPublicAsset",
+      "relation": "USED_IN",
+      "provenance": "INFERRED",
+      "confidence_score": 0.85,
+      "notes": "Light-theme icon variants are typically used in browser favicon or UI contexts where a light/dark pair is selected based on user preference."
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_logomark",
+      "relation": "CONTAINS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "The SVG icon file contains the GoalSeek logomark composed of two glyph paths"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_rounded_rect_background",
+      "relation": "CONTAINS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "The icon has a 180x180 rounded rectangle (rx=37) as background"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_adaptive_color_scheme",
+      "relation": "USES",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "SVG uses CSS media query prefers-color-scheme to invert colors between light and dark modes"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_svg_format",
+      "relation": "ENCODED_AS",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "File is an SVG vector graphic with viewBox 0 0 180 180"
+    },
+    {
+      "from": "icon_logomark",
+      "to": "icon_left_glyph_path",
+      "relation": "COMPOSED_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "Logomark is composed of left glyph path (Y-like shape starting at x=14)"
+    },
+    {
+      "from": "icon_logomark",
+      "to": "icon_right_glyph_path",
+      "relation": "COMPOSED_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "Logomark is composed of right glyph path (S/Z-like shape starting at x=101)"
+    },
+    {
+      "from": "icon_left_glyph_path",
+      "to": "icon_right_glyph_path",
+      "relation": "PAIRED_WITH",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "The two paths form a unified brand symbol together, both scaled at 95% from center"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_web_public_assets",
+      "relation": "BELONGS_TO",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "File is located in web/public/ directory which serves static web assets"
+    },
+    {
+      "from": "icon_adaptive_color_scheme",
+      "to": "icon_rounded_rect_background",
+      "relation": "CONTROLS_STYLE_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "CSS .background class fill is black in light mode and white in dark mode"
+    },
+    {
+      "from": "icon_adaptive_color_scheme",
+      "to": "icon_logomark",
+      "relation": "CONTROLS_STYLE_OF",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "CSS .foreground class fill is white in light mode and black in dark mode, applied to glyph paths"
+    },
+    {
+      "from": "icon_goalseek_app_icon",
+      "to": "icon_logomark",
+      "relation": "REPRESENTS_BRAND",
+      "provenance": "INFERRED",
+      "confidence_score": 0.95,
+      "note": "Icon serves as the brand/app identity symbol for the GoalSeek application"
+    },
+    {
+      "from": "icon_svg_format",
+      "to": "icon_web_public_assets",
+      "relation": "SUITABLE_FOR",
+      "provenance": "INFERRED",
+      "confidence_score": 0.85,
+      "note": "SVG format is resolution-independent and well-suited for web favicon/icon use"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "seven_phase_research_loop",
+      "label": "Seven-Phase Research Loop (READ_CONTEXT\u00e2\u2020\u2019PLAN\u00e2\u2020\u2019APPLY\u00e2\u2020\u2019COMMIT\u00e2\u2020\u2019VERIFY\u00e2\u2020\u2019DECIDE\u00e2\u2020\u2019LOG)",
+      "nodes": [
+        "wiki_loop_engine",
+        "wiki_step_engine",
+        "loop_phases_read_context",
+        "loop_phases_plan",
+        "loop_phases_apply_change",
+        "loop_phases_commit",
+        "loop_phases_verify",
+        "loop_phases_decide",
+        "loop_phases_log"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/loop_engine_phases.md"
+    },
+    {
+      "id": "provider_ecosystem",
+      "label": "Provider Ecosystem (Claude/Gemini/Codex/Opencode/Fake implement ProviderAdapter)",
+      "nodes": [
+        "wiki_provider_adapter",
+        "wiki_claude_code_provider",
+        "wiki_gemini_provider",
+        "wiki_fake_provider",
+        "agentspec_codex_provider",
+        "agentspec_opencode_provider"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-wiki.md"
+    },
+    {
+      "id": "kaggle_test_package_scenario",
+      "label": "Kaggle Irrigation Prediction Test Scenario (dataset + experiment + validation)",
+      "nodes": [
+        "overview_kaggle_s6e4",
+        "data_dict_irrigation_dataset",
+        "testpkg_experiment_py",
+        "testpkg_validate_results",
+        "overview_balanced_accuracy"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "test-package/context/overview.md"
+    },
+    {
+      "id": "hyperedge_icon_composition",
+      "label": "Icon Visual Composition",
+      "members": [
+        "icon_rounded_rect_background",
+        "icon_left_glyph_path",
+        "icon_right_glyph_path",
+        "icon_adaptive_color_scheme"
+      ],
+      "relation": "JOINTLY_COMPOSE",
+      "provenance": "EXTRACTED",
+      "confidence_score": 1.0,
+      "note": "Background rect, two foreground glyph paths, and adaptive color scheme jointly compose the GoalSeek app icon"
+    }
+  ],
+  "input_tokens": 21580,
+  "output_tokens": 5720
+}
