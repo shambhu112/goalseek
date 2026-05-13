@@ -57,7 +57,7 @@ class ProjectService:
         name: str,
         path: str | None = None,
         provider: str = "codex",
-        model: str = "gpt-5-codex",
+        model: str = "default",
         git_init: bool = True,
         overwrite_existing: bool = False,
     ) -> Path:

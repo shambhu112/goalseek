@@ -174,6 +174,11 @@ class LoopEngine:
         store = StateStore(root)
         existing = store.load()
         if existing:
+            provider_config = config.provider.implementation
+            if existing.provider != provider_config.name or existing.model != provider_config.model:
+                existing.provider = provider_config.name
+                existing.model = provider_config.model
+                store.save(existing)
             logger.debug("Loaded existing loop state for %s at iteration=%s", root, existing.current_iteration)
             return existing
         results = load_jsonl(root / "logs" / "results.jsonl")

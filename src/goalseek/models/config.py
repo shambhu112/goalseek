@@ -10,7 +10,7 @@ ProviderName = Literal["codex", "claude_code", "opencode", "gemini", "fake"]
 
 class ProviderSelection(BaseModel):
     name: ProviderName = "codex"
-    model: str = "gpt-5-codex"
+    model: str = "default"
     non_interactive: bool = True
     timeout_sec: int = 1800
     executable: str | None = None

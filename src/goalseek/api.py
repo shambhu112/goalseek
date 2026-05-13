@@ -20,7 +20,7 @@ def init_project(name: str, path: str | None = None, **overrides) -> str:
         name=name,
         path=path,
         provider=overrides.get("provider", "codex"),
-        model=overrides.get("model", "gpt-5-codex"),
+        model=overrides.get("model", "default"),
         git_init=not overrides.get("no_git_init", False),
         overwrite_existing=overrides.get("overwrite_existing", False),
     )

@@ -53,7 +53,7 @@ def _run_cli(
         request.iteration,
     )
     result = run_command(
-        [capabilities.executable, request.prompt_text],
+        _build_cli_command(request, capabilities.executable),
         cwd=Path(request.project_root),
         timeout_sec=request.timeout_sec,
         env=env,
@@ -69,5 +69,23 @@ def _run_cli(
         exit_code=result.exit_code,
         duration_sec=time.time() - start,
         changed_files=[],
-        error=None if result.exit_code == 0 else result.stderr.strip(),
+        error=(
+            None
+            if result.exit_code == 0
+            else result.stderr.strip() or f"{request.provider_name} exited with status {result.exit_code} without output"
+        ),
     )
+
+
+def _build_cli_command(request: ProviderRequest, executable: str) -> list[str]:
+    if request.provider_name == "codex":
+        command = [
+            executable,
+            "--dangerously-bypass-approvals-and-sandbox",
+            "exec",
+        ]
+        if request.model_name and request.model_name not in {"default", "auto"}:
+            command.extend(["--model", request.model_name])
+        command.append(request.prompt_text)
+        return command
+    return [executable, request.prompt_text]
