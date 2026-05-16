@@ -1,12 +1,12 @@
 ---
 title: Quickstart
-description: Install goalseek, create a project, run setup, capture a baseline, and start iterating.
+description: Install goalseek, create a project scaffold, prepare baseline files, and run the first iterations.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`goalseek` works best when you treat the project directory as an audit boundary: manifest, logs, runs, and research code all live there.
+`goalseek` works best when each research project is its own audit boundary. The manifest, baseline files, logs, run artifacts, and git history all live inside the project directory.
 
 ## Prerequisites
 
@@ -14,32 +14,30 @@ import TabItem from '@theme/TabItem';
 - `git`
 - one provider CLI available on `PATH` such as `codex`, `claude`, `gemini`, or `opencode`
 
-:::warning Clean git state matters
+:::warning[Clean git state matters]
 The loop creates candidate commits and may revert them. Start from a clean working tree before you run research iterations.
 :::
 
 ## Install the package
 
-<Tabs>
-  <TabItem value="uv" label="uv" default>
+Create a `pyproject.toml` for the workspace where you want to run `goalseek`, and point `uv` at the latest wheel published in the repository `dist/` folder:
 
-```bash
-uv venv
-source .venv/bin/activate
-uv pip install -e ".[dev]"
+```toml
+[project]
+name = "goalseek-runner"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "goalseek @ https://github.com/shambhu112/goalseek/raw/main/dist/goalseek-0.1.1-py3-none-any.whl",
+]
 ```
 
-  </TabItem>
-  <TabItem value="pip" label="pip">
+Then create the environment and sync it:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
+uv venv .venv
+uv sync
 ```
-
-  </TabItem>
-</Tabs>
 
 Verify the CLI:
 
@@ -55,7 +53,7 @@ Choose a provider and model, then scaffold a new project.
   <TabItem value="codex" label="Codex" default>
 
 ```bash
-uv run goalseek project init demo --provider codex --model gpt-5-codex
+uv run goalseek project init demo --provider codex --model gpt-5.4-mini
 ```
 
   </TabItem>
@@ -86,23 +84,44 @@ The scaffold includes:
 
 ```text
 demo/
+  .git/
   manifest.yaml
   program.md
   setup.py
+  validate_results.py
   experiment.py
   config/project.yaml
   context/
+  data/
   hidden/
   logs/
   runs/
 ```
 
-## Import the sample research assets
+## Check the manifest
 
-This repo includes a demo package with a small Kaggle-style example.
+Open `demo/manifest.yaml` and confirm the core files have the right modes:
 
-```bash
-./move-testpackage.sh --overwrite ./demo
+```yaml
+files:
+  - path: manifest.yaml
+    mode: read_only
+  - path: program.md
+    mode: read_only
+  - path: setup.py
+    mode: read_only
+  - path: validate_results.py
+    mode: hidden
+  - path: experiment.py
+    mode: writable
+  - path: hidden/**
+    mode: hidden
+  - path: config/**
+    mode: read_only
+  - path: runs/**
+    mode: generated
+  - path: logs/**
+    mode: generated
 ```
 
 Validate the manifest:
@@ -111,33 +130,82 @@ Validate the manifest:
 uv run goalseek manifest validate ./demo
 ```
 
+Then inspect `demo/config/project.yaml` and confirm the hypothesis provider, implementation provider, model names, timeouts, and logging settings match the run you want.
+
+## Prepare baseline files
+
+Before baseline, make sure these three files represent a runnable first version of the project:
+
+| File | Purpose |
+| --- | --- |
+| `experiment.py` | First implementation the verifier can train or run. It is writable and may be changed by later iterations. |
+| `program.md` | Reusable read-only instructions for the planning and implementation providers. It is visible during `READ_CONTEXT`, `PLAN`, and `APPLY_CHANGE`. |
+| `validate_results.py` | Hidden verification harness. It is not provider context. It runs during `VERIFY` when referenced by manifest verification commands. |
+
+The default manifest usually runs:
+
+```yaml
+verification:
+  commands:
+    - name: train
+      run: python3 experiment.py
+      cwd: .
+      timeout_sec: 1200
+    - name: evaluate
+      run: python3 validate_results.py --evaluate --output runs/latest/results.json
+      cwd: .
+      timeout_sec: 800
+```
+
+Make sure the metric extractor points at the verifier output:
+
+```yaml
+metric:
+  name: score
+  direction: maximize
+  extractor:
+    type: json_file
+    path: runs/latest/results.json
+    json_pointer: /metric
+```
+
+## Optional: import sample research assets
+
+This repo includes a small Kaggle-style demo package.
+
+```bash
+./move-testpackage.sh --overwrite ./demo
+```
+
+After importing, re-check `manifest.yaml`, `program.md`, `experiment.py`, and `validate_results.py`.
+
 ## Run the lifecycle
 
-1. Prepare the project:
+Prepare the project:
 
 ```bash
 uv run goalseek setup ./demo
 ```
 
-2. Commit any local changes before agent-driven edits:
+Commit local scaffold and setup changes before agent-driven edits:
 
 ```bash
 uv run goalseek gittreeclean --message "clean repo" ./demo
 ```
 
-3. Capture a baseline metric:
+Capture the baseline metric. Baseline runs verification on the current project without asking a provider to edit code.
 
 ```bash
 uv run goalseek baseline ./demo
 ```
 
-4. Run a few iterations:
+Run a few full iterations:
 
 ```bash
 uv run goalseek run ./demo --iterations 3
 ```
 
-5. Inspect status and summary:
+Inspect status and summary:
 
 ```bash
 uv run goalseek status ./demo
@@ -151,9 +219,28 @@ uv run goalseek summary ./demo
 - `logs/state.json` stores resumable loop state.
 - `logs/results.jsonl` stores append-only result summaries.
 
-:::tip Good first inspection points
+:::tip[Good first inspection points]
 Open `runs/0001/prompt.md`, `runs/0001/provider_output.md`, and `runs/0001/result.json` after your first iteration. Those files make the system much easier to reason about.
 :::
+
+## What happens during a run
+
+Baseline:
+
+1. discovers the project root
+2. validates `manifest.yaml`
+3. loads effective config
+4. runs verification commands
+5. extracts the metric
+6. writes `runs/0000_baseline/` and initializes `logs/state.json`
+
+Each later iteration:
+
+```text
+READ_CONTEXT -> PLAN -> APPLY_CHANGE -> COMMIT -> VERIFY -> DECIDE -> LOG
+```
+
+The loop resumes from `logs/state.json` if a previous run stopped between phases.
 
 ## Common failure modes
 
