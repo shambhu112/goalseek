@@ -19,8 +19,9 @@ The manifest is the contract that tells `goalseek` what the provider can see, wh
   manifest.yaml
   program.md
   setup.py
+  validate_results.py
   experiment.py
-  knowledge/
+  data/
   context/
   hidden/
   config/
@@ -32,9 +33,18 @@ The manifest is the contract that tells `goalseek` what the provider can see, wh
 ### Important directories
 
 - `context/`: visible reference material for the provider
+- `data/`: read-only project data when declared in the manifest
 - `hidden/`: files used by setup or verification that should not be visible to the provider
 - `runs/`: iteration artifacts
 - `logs/`: resumable state and append-only result history
+
+### Key files
+
+| File | Default mode | Purpose |
+| --- | --- | --- |
+| `program.md` | `read_only` | Reusable project instructions for planning and implementation. |
+| `experiment.py` | `writable` | Main experiment implementation the provider may modify. |
+| `validate_results.py` | `hidden` | Verifier harness run by manifest commands, not shown to the provider. |
 
 ## Scope modes
 
@@ -75,33 +85,61 @@ Useful when tools report the metric on standard error instead of standard output
 version: 1
 project:
   name: goalseek_demo
-metric:
-  name: Balanced accuracy Score
-  direction: maximize
-scope:
-  read_only:
-    - context/**
-  writable:
-    - experiment.py
-    - program.md
-  generated:
-    - runs/**
-    - logs/**
-  hidden:
-    - hidden/**
+
+files:
+  - path: manifest.yaml
+    mode: read_only
+  - path: program.md
+    mode: read_only
+  - path: setup.py
+    mode: read_only
+  - path: validate_results.py
+    mode: hidden
+  - path: experiment.py
+    mode: writable
+  - path: data/**
+    mode: read_only
+  - path: context/**
+    mode: read_only
+  - path: hidden/**
+    mode: hidden
+  - path: config/**
+    mode: read_only
+  - path: runs/**
+    mode: generated
+  - path: logs/**
+    mode: generated
+
 verification:
   commands:
-    - command: python validate_results.py
+    - name: train
+      run: python3 experiment.py
       cwd: .
+      timeout_sec: 1200
+    - name: evaluate
+      run: python3 validate_results.py --evaluate --output runs/latest/results.json
+      cwd: .
+
+metric:
+  name: score
+  direction: maximize
+  extractor:
+    type: json_file
+    path: runs/latest/results.json
+    json_pointer: /metric
+
+execution:
+  target: local
 ```
 
-:::warning Hidden files are a real boundary
+:::warning[Hidden files are a real boundary]
 `hidden/` is meant for data the provider should not see directly, such as sensitive inputs, evaluation logic, or ground truth the agent could otherwise game.
 :::
 
 ## Defaults worth knowing
 
 - `runs/` and `logs/` are git-ignored in scaffolded projects.
-- `experiment.py` and `program.md` are intended as default writable files.
+- `program.md` is read-only context; `experiment.py` is writable.
+- `validate_results.py` is hidden and should be called only through verification commands.
 - The working tree must be clean before `run` applies a change.
 - Rejected changes are reverted with `git revert`, not discarded with history rewriting.

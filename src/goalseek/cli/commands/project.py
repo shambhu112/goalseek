@@ -17,7 +17,7 @@ def project_group() -> None:
 @click.argument("name")
 @click.option("--path", type=click.Path(file_okay=False, dir_okay=True))
 @click.option("--provider", type=click.Choice(["codex", "claude_code", "opencode", "gemini", "fake"]), default="codex")
-@click.option("--model", default="gpt-5-codex")
+@click.option("--model", default="default")
 @click.option("--no-git-init", is_flag=True, default=False)
 def init_command(name: str, path: str | None, provider: str, model: str, no_git_init: bool) -> None:
     base_dir = Path(path).expanduser().resolve() if path else Path.cwd()
