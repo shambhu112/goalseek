@@ -1,6 +1,6 @@
 {
-    "production-version": "0.1.1",
-    "production-version-file": "goalseek-0.1.1.tar.gz",
-    "build-date": "2026-04-26T21:26:01Z",
+    "production-version": "0.1.2",
+    "production-version-file": "goalseek-0.1.2.tar.gz",
+    "build-date": "2026-05-16T20:18:57Z",
     "dev-version": "0.1.1"
 }
