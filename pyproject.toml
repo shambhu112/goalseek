@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "goalseek"
-version = "0.1.2"
+version = "0.1.3"
 description = "Local, audit-friendly research loop orchestration for coding agents."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -27,6 +27,7 @@ codex-sdk = [
   "openai-codex @ git+https://github.com/openai/codex.git#subdirectory=sdk/python",
 ]
 dev = [
+  "build>=1.3.0",
   "pytest>=9.0.3",
 ]
 

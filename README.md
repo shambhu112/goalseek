@@ -15,8 +15,6 @@ automated pipelines. The system also has a React Next JS UI to see the lifecycle
 The project centers on the concept of a "Research Loop"—an iterative process where an agent (like Claude or Gemini or Codex or OpenCode or Client) is given a goal and a codebase, and then systematically attempts to 
 improve a specific metric. Every change is tracked, every verification is logged, and every regression is automatically rolled back using git.
 
-### Kaggle Scenario (jump to scenario)
-To Try out a full Kaggle scenario of doing experiment go through the [example here](kaggle_demo_step_by_step.md)
 
 ### System Architecture
 You can look at the [system architecture details at this link](system_architecture.md)

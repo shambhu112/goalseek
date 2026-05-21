@@ -4,14 +4,21 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
+if ! command -v uv >/dev/null 2>&1; then
+  echo "uv not found." >&2
+  exit 1
+fi
+
+if [[ ! -d "$SCRIPT_DIR/.venv" ]]; then
+  uv venv .venv
+fi
+
+uv sync --extra dev
+
 if [[ -x "$SCRIPT_DIR/.venv/bin/python" ]]; then
-  PYTHON="$SCRIPT_DIR/.venv/bin/python"
-elif command -v python >/dev/null 2>&1; then
-  PYTHON="$(command -v python)"
-elif command -v python3 >/dev/null 2>&1; then
-  PYTHON="$(command -v python3)"
+  PYTHON_ARGS=(uv run --no-sync python)
 else
-  echo "Python interpreter not found." >&2
+  echo ".venv python not found." >&2
   exit 1
 fi
 
@@ -34,10 +41,10 @@ rsync -a --prune-empty-dirs \
   src/goalseek/ "$STAGING_DIR/src/goalseek/"
 
 echo "Building package..."
-"$PYTHON" -m build "$STAGING_DIR" --outdir "$SCRIPT_DIR/dist"
+"${PYTHON_ARGS[@]}" -m build "$STAGING_DIR" --outdir "$SCRIPT_DIR/dist"
 
 echo "Updating version metadata..."
-"$PYTHON" - <<'PY'
+"${PYTHON_ARGS[@]}" - <<'PY'
 import json
 from datetime import datetime, timezone
 from pathlib import Path
