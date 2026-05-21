@@ -6,6 +6,32 @@ from pydantic import BaseModel, Field
 
 
 ProviderName = Literal["codex", "claude_code", "opencode", "gemini", "fake"]
+CodexTransport = Literal["auto", "sdk", "cli"]
+
+
+class CodexParallelRunsConfig(BaseModel):
+    enabled: bool = False
+    candidates: int = 3
+    selection: str = "best_expected_metric"
+    isolate_worktrees: bool = True
+
+
+class CodexDeepResearchConfig(BaseModel):
+    enabled: bool = False
+    model: str = "o4-mini-deep-research"
+    max_sources: int = 8
+    include_web: bool = True
+    include_mcp: bool = True
+
+
+class CodexPluginsConfig(BaseModel):
+    enabled: bool = False
+    requested: list[str] = Field(default_factory=list)
+
+
+class CodexMcpConfig(BaseModel):
+    config_path: str = ".codex/config.toml"
+    allowed_servers: list[str] = Field(default_factory=list)
 
 
 class ProviderSelection(BaseModel):
@@ -15,6 +41,13 @@ class ProviderSelection(BaseModel):
     timeout_sec: int = 1800
     executable: str | None = None
     extra_args: list[str] = Field(default_factory=list)
+    transport: CodexTransport = "auto"
+    reuse_thread: bool = True
+    reasoning_effort: str | None = None
+    parallel_runs: CodexParallelRunsConfig = Field(default_factory=CodexParallelRunsConfig)
+    deep_research: CodexDeepResearchConfig = Field(default_factory=CodexDeepResearchConfig)
+    plugins: CodexPluginsConfig = Field(default_factory=CodexPluginsConfig)
+    mcp: CodexMcpConfig = Field(default_factory=CodexMcpConfig)
 
 
 class ProviderModes(BaseModel):

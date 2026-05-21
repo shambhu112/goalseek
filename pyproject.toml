@@ -24,6 +24,9 @@ cloudwatch = [
   "boto3>=1.34.0",
   "watchtower>=3.3.1",
 ]
+codex-sdk = [
+  "openai-codex @ git+https://github.com/openai/codex.git#subdirectory=sdk/python",
+]
 dev = [
   "pytest>=8.3.0",
 ]
@@ -31,9 +34,15 @@ dev = [
 [project.scripts]
 goalseek = "goalseek.cli.app:cli"
 
+[tool.hatch.metadata]
+allow-direct-references = true
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/goalseek"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+markers = [
+  "live: requires external Codex/OpenAI credentials and network",
+]

@@ -28,9 +28,13 @@ name = "goalseek-runner"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
-  "goalseek @ https://github.com/shambhu112/goalseek/raw/main/dist/goalseek-0.1.1-py3-none-any.whl",
+  "goalseek @ git+https://github.com/shambhu112/goalseek.git@b4c0baad91f69f35c03d25923cf57e732fc69ea0",
 ]
 ```
+:::warning[Adjust version to latest version]
+adjust `goalseek-0.1.1-py3-none-any.whl` to the latest version from [https://github.com/shambhu112/goalseek/blob/main/dist/version-info.json] (https://github.com/shambhu112/goalseek/blob/main/dist/version-info.json)
+:::
+
 
 Then create the environment and sync it:
 
@@ -138,9 +142,11 @@ Before baseline, make sure these three files represent a runnable first version 
 
 | File | Purpose |
 | --- | --- |
-| `experiment.py` | First implementation the verifier can train or run. It is writable and may be changed by later iterations. |
+| `experiment.py` | First implementation the verifier can experiment/train or run. It is writable and may be changed by later iterations. |
 | `program.md` | Reusable read-only instructions for the planning and implementation providers. It is visible during `READ_CONTEXT`, `PLAN`, and `APPLY_CHANGE`. |
 | `validate_results.py` | Hidden verification harness. It is not provider context. It runs during `VERIFY` when referenced by manifest verification commands. |
+| `context` folder | Put all context files in the folder Context |
+| `hidden` folder | Put all files that you do not want LLM to see in hiddent folder |
 
 The default manifest usually runs:
 
@@ -167,14 +173,6 @@ metric:
     type: json_file
     path: runs/latest/results.json
     json_pointer: /metric
-```
-
-## Optional: import sample research assets
-
-This repo includes a small Kaggle-style demo package.
-
-```bash
-./move-testpackage.sh --overwrite ./demo
 ```
 
 After importing, re-check `manifest.yaml`, `program.md`, `experiment.py`, and `validate_results.py`.

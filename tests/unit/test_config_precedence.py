@@ -74,3 +74,59 @@ logging:
     assert config.logging.level == "INFO"
     assert len(config.logging.handlers) == 1
     assert config.logging.handlers[0].type == "file"
+
+
+def test_codex_provider_advanced_config(project_factory):
+    project_root = project_factory("codex-advanced-config")
+    project_config = Path(project_root) / "config" / "project.yaml"
+    project_config.write_text(
+        """
+provider:
+  hypothesis:
+    name: codex
+    model: gpt-5-codex
+    transport: sdk
+    reuse_thread: true
+    reasoning_effort: high
+    parallel_runs:
+      enabled: true
+      candidates: 3
+      selection: best_expected_metric
+      isolate_worktrees: true
+    deep_research:
+      enabled: true
+      model: o4-mini-deep-research
+      max_sources: 8
+      include_web: true
+      include_mcp: true
+    plugins:
+      enabled: true
+      requested:
+        - github
+        - openai-docs
+    mcp:
+      config_path: .codex/config.toml
+      allowed_servers:
+        - openaiDeveloperDocs
+        - projectTools
+  implementation:
+    name: codex
+    model: gpt-5-codex
+    transport: cli
+    reuse_thread: false
+    reasoning_effort: medium
+""".strip()
+        + "\n",
+        encoding="utf-8",
+    )
+
+    config = ProjectService().load_effective_config(project_root)
+
+    assert config.provider.hypothesis.transport == "sdk"
+    assert config.provider.hypothesis.parallel_runs.enabled is True
+    assert config.provider.hypothesis.parallel_runs.candidates == 3
+    assert config.provider.hypothesis.deep_research.model == "o4-mini-deep-research"
+    assert config.provider.hypothesis.plugins.requested == ["github", "openai-docs"]
+    assert config.provider.hypothesis.mcp.allowed_servers == ["openaiDeveloperDocs", "projectTools"]
+    assert config.provider.implementation.transport == "cli"
+    assert config.provider.implementation.reuse_thread is False

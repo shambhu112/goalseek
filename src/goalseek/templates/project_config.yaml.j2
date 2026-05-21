@@ -4,11 +4,17 @@ provider:
     model: {{ model_name }}
     non_interactive: true
     timeout_sec: 300
+    transport: auto
+    reuse_thread: true
+    reasoning_effort: medium
   implementation:
     name: {{ provider_name }}
     model: {{ model_name }}
     non_interactive: true
     timeout_sec: 300
+    transport: auto
+    reuse_thread: true
+    reasoning_effort: high
 
 loop:
   repair_attempts: 1

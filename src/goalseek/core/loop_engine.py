@@ -313,6 +313,7 @@ class LoopEngine:
                 non_interactive=provider_config.non_interactive,
                 timeout_sec=provider_config.timeout_sec,
                 iteration=state.current_iteration,
+                metadata={"provider_config": provider_config},
             )
         )
         run_dir = root / (state.iteration_data.run_dir or f"runs/{state.current_iteration:04d}")
@@ -368,6 +369,7 @@ class LoopEngine:
                     non_interactive=provider_config.non_interactive,
                     timeout_sec=provider_config.timeout_sec,
                     iteration=state.current_iteration,
+                    metadata={"provider_config": provider_config},
                 )
             )
             state.iteration_data.provider_output = (state.iteration_data.provider_output or "") + "\n\n" + response.raw_text
