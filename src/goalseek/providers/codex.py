@@ -57,12 +57,16 @@ def _run_cli(
 ) -> ProviderResponse:
     start = time.time()
     if not capabilities.executable:
-        return ProviderResponse(
-            raw_text="",
-            exit_code=1,
-            duration_sec=0.0,
-            error="executable not found",
-            metadata=metadata or {},
+        return _log_provider_response(
+            request,
+            ProviderResponse(
+                raw_text="",
+                exit_code=1,
+                duration_sec=0.0,
+                error="executable not found",
+                metadata=metadata or {},
+            ),
+            source="_run_cli",
         )
     logger.info(
         "Running provider=%s mode=%s model=%s iteration=%s",
@@ -83,30 +87,38 @@ def _run_cli(
         request.mode,
         result.exit_code,
     )
-    return ProviderResponse(
-        raw_text=result.stdout or result.stderr,
-        exit_code=result.exit_code,
-        duration_sec=time.time() - start,
-        changed_files=[],
-        error=(
-            None
-            if result.exit_code == 0
-            else result.stderr.strip() or f"{request.provider_name} exited with status {result.exit_code} without output"
+    return _log_provider_response(
+        request,
+        ProviderResponse(
+            raw_text=result.stdout or result.stderr,
+            exit_code=result.exit_code,
+            duration_sec=time.time() - start,
+            changed_files=[],
+            error=(
+                None
+                if result.exit_code == 0
+                else result.stderr.strip() or f"{request.provider_name} exited with status {result.exit_code} without output"
+            ),
+            metadata=metadata or {},
         ),
-        metadata=metadata or {},
+        source="_run_cli",
     )
 
 
 def _build_cli_command(request: ProviderRequest, executable: str) -> list[str]:
     if request.provider_name == "codex":
+        config = _selection_from_request(request)
         command = [
             executable,
-            "--dangerously-bypass-approvals-and-sandbox",
-            "exec",
+            "--yolo",
         ]
-        if request.model_name and request.model_name not in {"default", "auto"}:
-            command.extend(["--model", request.model_name])
-        command.append(_prompt_for_codex(request, _selection_from_request(request)))
+        if config.model_catalog_json:
+            command.extend(["-c", f"model_catalog_json={config.model_catalog_json}"])
+        model = _model_arg(config.model)
+        if model:
+            command.extend(["-m", model])
+        command.append("exec")
+        command.append(_prompt_for_codex(request, config))
         return command
     return [executable, request.prompt_text]
 
@@ -138,13 +150,17 @@ def _run_codex(
         response = _run_cli(request, capabilities, metadata={"transport": "cli", "sdk_error": sdk.error or ""})
         response.metadata.setdefault("transport_fallback", "sdk_unavailable")
         return response
-    return ProviderResponse(
-        raw_text="",
-        exit_code=1,
-        duration_sec=0.0,
-        changed_files=[],
-        error=f"Codex SDK unavailable: {sdk.error or 'package not importable'}",
-        metadata={"transport": "sdk", "sdk_error": sdk.error or "package not importable"},
+    return _log_provider_response(
+        request,
+        ProviderResponse(
+            raw_text="",
+            exit_code=1,
+            duration_sec=0.0,
+            changed_files=[],
+            error=f"Codex SDK unavailable: {sdk.error or 'package not importable'}",
+            metadata={"transport": "sdk", "sdk_error": sdk.error or "package not importable"},
+        ),
+        source="_run_codex",
     )
 
 
@@ -163,7 +179,7 @@ def _run_sdk(
                 _prompt_for_codex(request, config),
                 cwd=str(request.project_root),
                 effort=config.reasoning_effort,
-                model=_model_arg(request.model_name),
+                model=_model_arg(config.model),
             )
             thread_id = _thread_id(thread)
             if config.reuse_thread and thread_id:
@@ -180,31 +196,43 @@ def _run_sdk(
                 "final_response": final_response,
                 "usage": _metadata_value(getattr(result, "usage", None)),
             }
-            return ProviderResponse(
-                raw_text=final_response,
-                exit_code=0 if turn_error is None else 1,
-                duration_sec=time.time() - start,
-                changed_files=[],
-                error=None if turn_error is None else _stringify_metadata(turn_error),
-                metadata={key: value for key, value in metadata.items() if value is not None},
+            return _log_provider_response(
+                request,
+                ProviderResponse(
+                    raw_text=final_response,
+                    exit_code=0 if turn_error is None else 1,
+                    duration_sec=time.time() - start,
+                    changed_files=[],
+                    error=None if turn_error is None else _stringify_metadata(turn_error),
+                    metadata={key: value for key, value in metadata.items() if value is not None},
+                ),
+                source="_run_sdk",
             )
     except TimeoutError as exc:
-        return ProviderResponse(
-            raw_text="",
-            exit_code=124,
-            duration_sec=time.time() - start,
-            changed_files=[],
-            error=str(exc),
-            metadata={"transport": "sdk", "sdk_package": sdk.package_name or ""},
+        return _log_provider_response(
+            request,
+            ProviderResponse(
+                raw_text="",
+                exit_code=124,
+                duration_sec=time.time() - start,
+                changed_files=[],
+                error=str(exc),
+                metadata={"transport": "sdk", "sdk_package": sdk.package_name or ""},
+            ),
+            source="_run_sdk",
         )
     except Exception as exc:
-        return ProviderResponse(
-            raw_text="",
-            exit_code=1,
-            duration_sec=time.time() - start,
-            changed_files=[],
-            error=str(exc),
-            metadata={"transport": "sdk", "sdk_package": sdk.package_name or ""},
+        return _log_provider_response(
+            request,
+            ProviderResponse(
+                raw_text="",
+                exit_code=1,
+                duration_sec=time.time() - start,
+                changed_files=[],
+                error=str(exc),
+                metadata={"transport": "sdk", "sdk_package": sdk.package_name or ""},
+            ),
+            source="_run_sdk",
         )
 
 
@@ -220,7 +248,7 @@ def _sdk_thread(codex, request: ProviderRequest, config: ProviderSelection, thre
     thread_id = thread_ids.get(key)
     thread_config = _sdk_thread_config(config)
     start_kwargs = {
-        "model": _model_arg(request.model_name),
+        "model": _model_arg(config.model),
         "cwd": str(request.project_root),
         "config": thread_config,
     }
@@ -297,9 +325,14 @@ def _prompt_for_codex(request: ProviderRequest, config: ProviderSelection) -> st
 
 
 def _sdk_thread_config(config: ProviderSelection) -> dict[str, str] | None:
-    if not config.reasoning_effort:
+    thread_config: dict[str, str] = {}
+    if config.reasoning_effort:
+        thread_config["model_reasoning_effort"] = config.reasoning_effort
+    if config.model_catalog_json:
+        thread_config["model_catalog_json"] = config.model_catalog_json
+    if not thread_config:
         return None
-    return {"model_reasoning_effort": config.reasoning_effort}
+    return thread_config
 
 
 def _model_arg(model_name: str) -> str | None:
@@ -323,6 +356,20 @@ def _thread_id(thread) -> str | None:
     if value is None:
         value = getattr(thread, "thread_id", None)
     return str(value) if value else None
+
+
+def _log_provider_response(request: ProviderRequest, response: ProviderResponse, *, source: str) -> ProviderResponse:
+    logger.debug(
+        "Created Codex provider response source=%s mode=%s iteration=%s exit_code=%s error=%s metadata=%s raw_text=%r",
+        source,
+        request.mode,
+        request.iteration,
+        response.exit_code,
+        response.error,
+        response.metadata,
+        response.raw_text,
+    )
+    return response
 
 
 def _call_with_supported_kwargs(func: Callable[..., Any], *args, **kwargs):

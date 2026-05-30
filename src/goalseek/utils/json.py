@@ -5,8 +5,11 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Any
 
+from goalseek.utils.file_logging import log_if_creating_file
 
-def dump_json_atomic(path: Path, payload: Any) -> None:
+
+def dump_json_atomic(path: Path, payload: Any, *, method_name: str = "dump_json_atomic") -> None:
+    log_if_creating_file(path, method_name)
     path.parent.mkdir(parents=True, exist_ok=True)
     with NamedTemporaryFile("w", encoding="utf-8", delete=False, dir=path.parent) as tmp:
         json.dump(payload, tmp, indent=2, sort_keys=True)
@@ -15,7 +18,8 @@ def dump_json_atomic(path: Path, payload: Any) -> None:
     tmp_path.replace(path)
 
 
-def append_jsonl(path: Path, payload: Any) -> None:
+def append_jsonl(path: Path, payload: Any, *, method_name: str = "append_jsonl") -> None:
+    log_if_creating_file(path, method_name)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(payload, sort_keys=True))

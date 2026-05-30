@@ -30,11 +30,11 @@ files:
 verification:
   commands:
     - name: train
-      run: python3 experiment.py
+      run: uv run experiment.py
       cwd: .
       timeout_sec: 1200
     - name: evaluate
-      run: python3 validate_results.py --evaluate --output runs/latest/results.json
+      run: uv run validate_results.py --evaluate --output runs/latest/results.json
       cwd: .
       timeout_sec: 800
 

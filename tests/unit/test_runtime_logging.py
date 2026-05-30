@@ -31,7 +31,9 @@ def test_configure_package_logging_writes_to_stdout_and_file(tmp_path, capsys):
 
     output = capsys.readouterr().out
     assert "hello logging" in output
-    assert "hello logging" in (tmp_path / "logs" / "runtime.log").read_text(encoding="utf-8")
+    log_text = (tmp_path / "logs" / "runtime.log").read_text(encoding="utf-8")
+    assert "[_build_handler] creating file" in log_text
+    assert "hello logging" in log_text
 
 
 def test_cloudwatch_logging_requires_optional_dependencies(monkeypatch, tmp_path):

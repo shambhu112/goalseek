@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 from pathlib import Path
 
@@ -112,10 +113,10 @@ def test_codex_plan_invokes_run_command(monkeypatch, tmp_path):
     assert captured == {
         "command": [
             "/usr/bin/codex",
-            "--dangerously-bypass-approvals-and-sandbox",
-            "exec",
-            "--model",
+            "--yolo",
+            "-m",
             "gpt-5-codex",
+            "exec",
             "Plan a focused change.",
         ],
         "cwd": tmp_path,
@@ -164,10 +165,10 @@ def test_codex_implement_invokes_run_command(monkeypatch, tmp_path):
     assert captured == {
         "command": [
             "/usr/bin/codex",
-            "--dangerously-bypass-approvals-and-sandbox",
-            "exec",
-            "--model",
+            "--yolo",
+            "-m",
             "gpt-5-codex",
+            "exec",
             "Plan a focused change.",
         ],
         "cwd": tmp_path,
@@ -248,41 +249,92 @@ def test_run_cli_prefers_stdout_on_success(monkeypatch, tmp_path):
     assert response.error is None
 
 
+def test_codex_cli_logs_debug_response(monkeypatch, tmp_path, caplog):
+    caplog.set_level(logging.DEBUG, logger="goalseek.providers.codex")
+
+    def fake_run_command(command, cwd, timeout_sec=1800, env=None, stream_callback=None):
+        return CommandResult(
+            args=command,
+            cwd=str(cwd),
+            exit_code=0,
+            stdout="plan ready",
+            stderr="",
+            duration_sec=0.01,
+        )
+
+    monkeypatch.setattr("goalseek.providers.codex.run_command", fake_run_command)
+
+    _run_cli(_request(tmp_path), _available_codex_capabilities())
+
+    assert "Created Codex provider response source=_run_cli" in caplog.text
+    assert "mode=hypothesis" in caplog.text
+    assert "raw_text='plan ready'" in caplog.text
+
+
 def test_codex_cli_omits_model_when_config_uses_default(tmp_path):
     request = _request(tmp_path)
-    request.model_name = "default"
+    request.metadata["provider_config"] = ProviderSelection(name="codex", model="default", transport="cli")
 
     command = _build_cli_command(request, "/usr/bin/codex")
 
     assert command == [
         "/usr/bin/codex",
-        "--dangerously-bypass-approvals-and-sandbox",
+        "--yolo",
         "exec",
         "Plan a focused change.",
     ]
 
 
-def test_codex_plan_passes_requested_model_to_cli(monkeypatch, tmp_path):
+def test_codex_cli_passes_model_catalog_json_config(tmp_path):
+    request = _request(tmp_path)
+    request.metadata["provider_config"] = ProviderSelection(
+        name="codex",
+        model="gpt-5-codex",
+        transport="cli",
+        model_catalog_json="hidden/models-with-iris-alpha.json",
+    )
+
+    command = _build_cli_command(request, "/usr/bin/codex")
+
+    assert command == [
+        "/usr/bin/codex",
+        "--yolo",
+        "-c",
+        "model_catalog_json=hidden/models-with-iris-alpha.json",
+        "-m",
+        "gpt-5-codex",
+        "exec",
+        "Plan a focused change.",
+    ]
+
+
+def test_codex_plan_passes_project_config_model_to_cli(monkeypatch, tmp_path):
     captured = _capture_codex_command(monkeypatch)
     request = _request(tmp_path)
-    request.model_name = "gpt-5-codex-custom"
+    request.model_name = "ignored-request-model"
+    request.metadata["provider_config"] = ProviderSelection(name="codex", model="gpt-5-codex-custom", transport="cli")
 
     CodexProvider().plan(request)
 
     command = captured["command"]
-    assert request.model_name in command
+    assert "-m" in command
+    assert "gpt-5-codex-custom" in command
+    assert request.model_name not in command
 
 
-def test_codex_implement_passes_requested_model_to_cli(monkeypatch, tmp_path):
+def test_codex_implement_passes_project_config_model_to_cli(monkeypatch, tmp_path):
     captured = _capture_codex_command(monkeypatch)
     request = _request(tmp_path)
     request.mode = "implementation"
-    request.model_name = "gpt-5-codex-custom"
+    request.model_name = "ignored-request-model"
+    request.metadata["provider_config"] = ProviderSelection(name="codex", model="gpt-5-codex-custom", transport="cli")
 
     CodexProvider().implement(request)
 
     command = captured["command"]
-    assert request.model_name in command
+    assert "-m" in command
+    assert "gpt-5-codex-custom" in command
+    assert request.model_name not in command
 
 
 def _available_codex_capabilities() -> ProviderCapabilities:
@@ -320,16 +372,16 @@ def _capture_codex_command(monkeypatch, exit_code=0, stdout="codex output", stde
     return captured
 
 
-def test_codex_plan_rejects_dangerous_bypass_flag(monkeypatch, tmp_path):
+def test_codex_plan_uses_yolo_flag(monkeypatch, tmp_path):
     captured = _capture_codex_command(monkeypatch)
 
     provider = CodexProvider()
     provider.plan(_request(tmp_path))
 
-    assert "--dangerously-bypass-approvals-and-sandbox" in captured["command"]
+    assert "--yolo" in captured["command"]
 
 
-def test_codex_implement_rejects_dangerous_bypass_flag(monkeypatch, tmp_path):
+def test_codex_implement_uses_yolo_flag(monkeypatch, tmp_path):
     captured = _capture_codex_command(monkeypatch)
 
     provider = CodexProvider()
@@ -337,7 +389,7 @@ def test_codex_implement_rejects_dangerous_bypass_flag(monkeypatch, tmp_path):
     request.mode = "implementation"
     provider.implement(request)
 
-    assert "--dangerously-bypass-approvals-and-sandbox" in captured["command"]
+    assert "--yolo" in captured["command"]
 
 
 def test_codex_plan_passes_non_interactive_exec_command(monkeypatch, tmp_path):
@@ -349,10 +401,10 @@ def test_codex_plan_passes_non_interactive_exec_command(monkeypatch, tmp_path):
 
     assert captured["command"] == [
         "/usr/bin/codex",
-        "--dangerously-bypass-approvals-and-sandbox",
-        "exec",
-        "--model",
+        "--yolo",
+        "-m",
         "gpt-5-codex",
+        "exec",
         request.prompt_text,
     ]
     assert captured["cwd"] == tmp_path
@@ -364,17 +416,17 @@ def test_codex_uses_default_model_without_explicit_model_flag(monkeypatch, tmp_p
     captured = _capture_codex_command(monkeypatch)
 
     request = _request(tmp_path)
-    request.model_name = "default"
+    request.metadata["provider_config"] = ProviderSelection(name="codex", model="default", transport="cli")
     provider = CodexProvider()
     provider.plan(request)
 
     assert captured["command"] == [
         "/usr/bin/codex",
-        "--dangerously-bypass-approvals-and-sandbox",
+        "--yolo",
         "exec",
         request.prompt_text,
     ]
-    assert "--model" not in captured["command"]
+    assert "-m" not in captured["command"]
 
 
 def test_codex_propagates_empty_stdout_and_stderr_failure_message(monkeypatch, tmp_path):
@@ -443,6 +495,7 @@ def test_codex_forced_sdk_runs_thread(monkeypatch, tmp_path):
         ),
     )
     request = _request(tmp_path)
+    request.model_name = "ignored-request-model"
     request.metadata["provider_config"] = ProviderSelection(
         name="codex",
         model="gpt-5-codex",
@@ -467,6 +520,66 @@ def test_codex_forced_sdk_runs_thread(monkeypatch, tmp_path):
     assert captured["run_kwargs"] == {
         "cwd": str(tmp_path),
         "effort": "high",
+        "model": "gpt-5-codex",
+    }
+
+
+def test_codex_forced_sdk_passes_model_catalog_json_config(monkeypatch, tmp_path):
+    captured: dict[str, object] = {}
+
+    class FakeThread:
+        id = "thread-1"
+
+        def run(self, prompt, **kwargs):
+            captured["run_kwargs"] = kwargs
+
+            class FakeResult:
+                id = "turn-1"
+                status = "completed"
+                error = None
+                duration_ms = 25
+                final_response = "sdk plan ready"
+                usage = None
+
+            return FakeResult()
+
+    class FakeCodex:
+        def __init__(self, config=None):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+        def thread_start(self, **kwargs):
+            captured["thread_start_kwargs"] = kwargs
+            return FakeThread()
+
+    monkeypatch.setattr(
+        "goalseek.providers.codex._load_sdk",
+        lambda: _SdkLoadResult(codex=FakeCodex, package_name="openai_codex"),
+    )
+    request = _request(tmp_path)
+    request.model_name = "ignored-request-model"
+    request.metadata["provider_config"] = ProviderSelection(
+        name="codex",
+        model="gpt-5-codex",
+        transport="sdk",
+        model_catalog_json="hidden/models-with-iris-alpha.json",
+    )
+
+    response = CodexProvider().plan(request)
+
+    assert response.exit_code == 0
+    assert captured["thread_start_kwargs"] == {
+        "model": "gpt-5-codex",
+        "cwd": str(tmp_path),
+        "config": {"model_catalog_json": "hidden/models-with-iris-alpha.json"},
+    }
+    assert captured["run_kwargs"] == {
+        "cwd": str(tmp_path),
         "model": "gpt-5-codex",
     }
 
@@ -665,6 +778,50 @@ def test_codex_sdk_empty_final_response_is_successful_empty_output(monkeypatch, 
     assert response.raw_text == ""
     assert response.error is None
     assert response.metadata["final_response"] == ""
+
+
+def test_codex_sdk_logs_debug_response(monkeypatch, tmp_path, caplog):
+    caplog.set_level(logging.DEBUG, logger="goalseek.providers.codex")
+
+    class FakeResult:
+        id = "turn-1"
+        status = "completed"
+        error = None
+        duration_ms = 10
+        final_response = "sdk debug text"
+        usage = None
+
+    class FakeThread:
+        id = "thread-1"
+
+        def run(self, prompt, **kwargs):
+            return FakeResult()
+
+    class FakeCodex:
+        def __init__(self, config=None):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+        def thread_start(self, **kwargs):
+            return FakeThread()
+
+    monkeypatch.setattr(
+        "goalseek.providers.codex._load_sdk",
+        lambda: _SdkLoadResult(codex=FakeCodex, package_name="openai_codex"),
+    )
+    request = _request(tmp_path)
+    request.metadata["provider_config"] = ProviderSelection(name="codex", model="gpt-5-codex", transport="sdk")
+
+    CodexProvider().plan(request)
+
+    assert "Created Codex provider response source=_run_sdk" in caplog.text
+    assert "sdk debug text" in caplog.text
+    assert "'transport': 'sdk'" in caplog.text
 
 
 def test_codex_sdk_timeout_maps_to_124(monkeypatch, tmp_path):
@@ -951,4 +1108,3 @@ def test_live_codex_provider_sdk_fails_with_broken_executable(tmp_path):
     assert response.error
     assert response.raw_text == ""
     assert response.metadata["transport"] == "sdk"
-

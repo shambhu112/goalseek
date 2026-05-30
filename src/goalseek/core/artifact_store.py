@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from goalseek.models.results import HistoryRecord
+from goalseek.utils.file_logging import log_if_creating_file
 from goalseek.utils.json import append_jsonl, dump_json_atomic, load_json, load_jsonl
 
 
@@ -29,6 +30,7 @@ class ArtifactStore:
 
     def write_text(self, run_dir: Path, name: str, content: str) -> Path:
         target = run_dir / name
+        log_if_creating_file(target, "write_text")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(content, encoding="utf-8")
         return target
@@ -36,20 +38,21 @@ class ArtifactStore:
     def write_json(self, run_dir: Path, name: str, payload: Any) -> Path:
         target = run_dir / name
         target.parent.mkdir(parents=True, exist_ok=True)
-        dump_json_atomic(target, payload)
+        dump_json_atomic(target, payload, method_name="write_json")
         return target
 
     def copy_file(self, run_dir: Path, source: Path, name: str | None = None) -> Path:
         target = run_dir / (name or source.name)
+        log_if_creating_file(target, "copy_file")
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
         return target
 
     def append_result(self, payload: dict[str, Any]) -> None:
-        append_jsonl(self.logs_dir / "results.jsonl", payload)
+        append_jsonl(self.logs_dir / "results.jsonl", payload, method_name="append_result")
 
     def append_direction(self, payload: dict[str, Any]) -> None:
-        append_jsonl(self.logs_dir / "directions.jsonl", payload)
+        append_jsonl(self.logs_dir / "directions.jsonl", payload, method_name="append_direction")
 
     def refresh_latest_history(self) -> Path:
         history = [
@@ -57,7 +60,7 @@ class ArtifactStore:
             for record in load_jsonl(self.logs_dir / "results.jsonl")
         ]
         target = self.latest_dir / "history.json"
-        dump_json_atomic(target, history)
+        dump_json_atomic(target, history, method_name="refresh_latest_history")
         return target
 
     def _history_entry(self, record: dict[str, Any]) -> HistoryRecord:

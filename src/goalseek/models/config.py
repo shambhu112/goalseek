@@ -37,6 +37,7 @@ class CodexMcpConfig(BaseModel):
 class ProviderSelection(BaseModel):
     name: ProviderName = "codex"
     model: str = "default"
+    model_catalog_json: str | None = None
     non_interactive: bool = True
     timeout_sec: int = 1800
     executable: str | None = None

@@ -13,6 +13,7 @@ from goalseek.errors import ConfigError, ProjectStateError
 from goalseek.models.config import EffectiveConfig
 from goalseek.models.project import ProjectPaths
 from goalseek.runtime_logging import configure_package_logging
+from goalseek.utils.file_logging import log_if_creating_file
 from goalseek.utils.json import dump_json_atomic
 from goalseek.utils.paths import ensure_within_root
 from goalseek.utils.subprocess import CommandResult, run_command
@@ -96,10 +97,13 @@ class ProjectService:
         ):
             rendered = self._env.get_template(template_name).render(**context)
             destination = project_root / output_name
+            log_if_creating_file(destination, "create_scaffold")
             destination.write_text(rendered, encoding="utf-8")
 
         for dotkeep in ("runs/.gitkeep", "logs/.gitkeep"):
-            (project_root / dotkeep).write_text("", encoding="utf-8")
+            target = project_root / dotkeep
+            log_if_creating_file(target, "create_scaffold")
+            target.write_text("", encoding="utf-8")
 
         if git_init:
             from goalseek.gitops.repo import Repo
@@ -159,7 +163,7 @@ class ProjectService:
     def persist_setup_snapshot(self, project_root: str | Path, payload: dict[str, Any]) -> Path:
         paths = self.load_paths(project_root)
         target = paths.logs_dir / "setup_snapshot.json"
-        dump_json_atomic(target, payload)
+        dump_json_atomic(target, payload, method_name="persist_setup_snapshot")
         return target
 
     def run_setup_script(self, project_root: str | Path) -> CommandResult:

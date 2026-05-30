@@ -51,6 +51,9 @@ def configure_package_logging(config: EffectiveConfig, project_root: str | Path 
         if handler_config.level:
             handler.setLevel(_coerce_level(handler_config.level))
         package_logger.addHandler(handler)
+        created_path = getattr(handler, "_goalseek_created_path", None)
+        if created_path:
+            package_logger.info("[_build_handler] creating file %s.", created_path)
 
     package_logger.debug(
         "Configured package logging with %d handler(s) for %s",
@@ -71,7 +74,11 @@ def _build_handler(
         if not target.is_absolute():
             target = project_root / target
         target.parent.mkdir(parents=True, exist_ok=True)
-        return logging.FileHandler(target, mode=handler_config.mode, encoding="utf-8")
+        created = not target.exists()
+        handler = logging.FileHandler(target, mode=handler_config.mode, encoding="utf-8")
+        if created:
+            setattr(handler, "_goalseek_created_path", target)
+        return handler
     if isinstance(handler_config, CloudWatchLoggingHandler):
         return _build_cloudwatch_handler(handler_config, project_root)
     raise ConfigError(f"unsupported logging handler configuration: {handler_config}")

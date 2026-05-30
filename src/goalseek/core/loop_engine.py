@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import contextmanager
 import logging
 from datetime import datetime, timezone
 from pathlib import Path
@@ -271,72 +272,74 @@ class LoopEngine:
         state: LoopState,
         config,
     ) -> LoopState:
-        run_dir = artifacts.iteration_dir(state.current_iteration)
-        context = ContextReader(repo).read(root, scope, state.current_iteration)
-        git_before = f"{context.git_log}\n\n{context.git_diff}".strip()
-        env_snapshot = self.project_service.environment_snapshot(root, config, state.provider, state.model)
-        artifacts.write_text(run_dir, "git_before.txt", git_before)
-        artifacts.write_json(run_dir, "env.json", env_snapshot)
-        state.iteration_data = IterationPayload(
-            run_dir=run_dir.relative_to(root).as_posix(),
-            git_before=git_before,
-            environment=env_snapshot,
-            context_summary={
-                "file_count": len(context.files),
-                "latest_results_count": len(context.latest_results),
-                "active_directions_count": len(context.directions),
-            },
-        )
-        state.current_phase = LoopPhase.PLAN
-        logger.debug("Read context for iteration=%s with %s files", state.current_iteration, len(context.files))
-        return state
+        with self._debug_phase_method("_phase_read_context", state):
+            run_dir = artifacts.iteration_dir(state.current_iteration)
+            context = ContextReader(repo).read(root, scope, state.current_iteration)
+            git_before = f"{context.git_log}\n\n{context.git_diff}".strip()
+            env_snapshot = self.project_service.environment_snapshot(root, config, state.provider, state.model)
+            artifacts.write_text(run_dir, "git_before.txt", git_before)
+            artifacts.write_json(run_dir, "env.json", env_snapshot)
+            state.iteration_data = IterationPayload(
+                run_dir=run_dir.relative_to(root).as_posix(),
+                git_before=git_before,
+                environment=env_snapshot,
+                context_summary={
+                    "file_count": len(context.files),
+                    "latest_results_count": len(context.latest_results),
+                    "active_directions_count": len(context.directions),
+                },
+            )
+            state.current_phase = LoopPhase.PLAN
+            logger.debug("Read context for iteration=%s with %s files", state.current_iteration, len(context.files))
+            return state
 
     def _phase_plan(self, root: Path, scope: ManifestScope, state: LoopState, config, artifacts: ArtifactStore) -> LoopState:
-        provider_config = config.provider.hypothesis
-        provider = self.provider_registry.get(provider_config.name)
-        recent_results = load_jsonl(root / "logs" / "results.jsonl")
-        non_kept_streak = 0
-        for item in reversed(recent_results):
-            if item.get("outcome") in {"baseline", "kept"}:
-                break
-            non_kept_streak += 1
-        prompt = build_planning_prompt(scope, ContextReader().read(root, scope, state.current_iteration), state.current_iteration, non_kept_streak >= 3)
-        response = provider.plan(
-            ProviderRequest(
-                project_root=root,
-                provider_name=provider_config.name,
-                model_name=provider_config.model,
-                mode="hypothesis",
-                prompt_text=prompt,
-                writable_paths=scope.writable_patterns,
-                generated_paths=scope.generated_patterns,
-                non_interactive=provider_config.non_interactive,
-                timeout_sec=provider_config.timeout_sec,
-                iteration=state.current_iteration,
-                metadata={"provider_config": provider_config},
+        with self._debug_phase_method("_phase_plan", state):
+            provider_config = config.provider.hypothesis
+            provider = self.provider_registry.get(provider_config.name)
+            recent_results = load_jsonl(root / "logs" / "results.jsonl")
+            non_kept_streak = 0
+            for item in reversed(recent_results):
+                if item.get("outcome") in {"baseline", "kept"}:
+                    break
+                non_kept_streak += 1
+            prompt = build_planning_prompt(scope, ContextReader().read(root, scope, state.current_iteration), state.current_iteration, non_kept_streak >= 3)
+            response = provider.plan(
+                ProviderRequest(
+                    project_root=root,
+                    provider_name=provider_config.name,
+                    model_name=provider_config.model,
+                    mode="hypothesis",
+                    prompt_text=prompt,
+                    writable_paths=scope.writable_patterns,
+                    generated_paths=scope.generated_patterns,
+                    non_interactive=provider_config.non_interactive,
+                    timeout_sec=provider_config.timeout_sec,
+                    iteration=state.current_iteration,
+                    metadata={"provider_config": provider_config},
+                )
             )
-        )
-        run_dir = root / (state.iteration_data.run_dir or f"runs/{state.current_iteration:04d}")
-        artifacts.write_text(run_dir, "prompt.md", prompt)
-        artifacts.write_text(run_dir, "provider_output.md", response.raw_text)
-        if response.exit_code != 0:
+            run_dir = root / (state.iteration_data.run_dir or f"runs/{state.current_iteration:04d}")
+            artifacts.write_text(run_dir, "prompt.md", prompt)
+            artifacts.write_text(run_dir, "provider_output.md", response.raw_text)
+            if response.exit_code != 0:
+                state.iteration_data.prompt_text = prompt
+                state.iteration_data.provider_output = response.raw_text
+                state.iteration_data.notes = response.error or "provider planning failed"
+                state.iteration_data.decision_outcome = "skipped_provider_failure"
+                state.current_phase = LoopPhase.LOG
+                logger.warning("Planning failed for iteration=%s: %s", state.current_iteration, state.iteration_data.notes)
+                return state
             state.iteration_data.prompt_text = prompt
             state.iteration_data.provider_output = response.raw_text
-            state.iteration_data.notes = response.error or "provider planning failed"
-            state.iteration_data.decision_outcome = "skipped_provider_failure"
-            state.current_phase = LoopPhase.LOG
-            logger.warning("Planning failed for iteration=%s: %s", state.current_iteration, state.iteration_data.notes)
+            state.iteration_data.plan_text = response.raw_text
+            state.iteration_data.plan_title = str(response.metadata.get("title", f"iteration {state.current_iteration}"))
+            planned_files = response.metadata.get("planned_files", [])
+            state.iteration_data.planned_files = list(planned_files) if isinstance(planned_files, list) else []
+            artifacts.write_text(run_dir, "plan.md", response.raw_text)
+            state.current_phase = LoopPhase.APPLY_CHANGE
+            logger.info("Planning complete for iteration=%s title=%s", state.current_iteration, state.iteration_data.plan_title)
             return state
-        state.iteration_data.prompt_text = prompt
-        state.iteration_data.provider_output = response.raw_text
-        state.iteration_data.plan_text = response.raw_text
-        state.iteration_data.plan_title = str(response.metadata.get("title", f"iteration {state.current_iteration}"))
-        planned_files = response.metadata.get("planned_files", [])
-        state.iteration_data.planned_files = list(planned_files) if isinstance(planned_files, list) else []
-        artifacts.write_text(run_dir, "plan.md", response.raw_text)
-        state.current_phase = LoopPhase.APPLY_CHANGE
-        logger.info("Planning complete for iteration=%s title=%s", state.current_iteration, state.iteration_data.plan_title)
-        return state
 
     def _phase_apply(
         self,
@@ -347,74 +350,76 @@ class LoopEngine:
         state: LoopState,
         config,
     ) -> LoopState:
-        changed_files = repo.working_tree_changed_files()
-        if changed_files:
-            logger.info(
-                "Resuming apply phase with %s existing changed file(s) for iteration=%s",
-                len(changed_files),
-                state.current_iteration,
-            )
-        else:
-            provider_config = config.provider.implementation
-            provider = self.provider_registry.get(provider_config.name)
-            response = provider.implement(
-                ProviderRequest(
-                    project_root=root,
-                    provider_name=provider_config.name,
-                    model_name=provider_config.model,
-                    mode="implementation",
-                    prompt_text=build_implementation_prompt(scope, state.iteration_data.plan_text or "", state.current_iteration),
-                    writable_paths=scope.writable_patterns,
-                    generated_paths=scope.generated_patterns,
-                    non_interactive=provider_config.non_interactive,
-                    timeout_sec=provider_config.timeout_sec,
-                    iteration=state.current_iteration,
-                    metadata={"provider_config": provider_config},
-                )
-            )
-            state.iteration_data.provider_output = (state.iteration_data.provider_output or "") + "\n\n" + response.raw_text
-            if response.exit_code != 0:
-                state.iteration_data.notes = response.error or "provider implementation failed"
-                state.iteration_data.decision_outcome = "skipped_provider_failure"
-                state.current_phase = LoopPhase.LOG
-                logger.warning("Implementation failed for iteration=%s: %s", state.current_iteration, state.iteration_data.notes)
-                return state
+        with self._debug_phase_method("_phase_apply", state):
             changed_files = repo.working_tree_changed_files()
-        if not changed_files:
-            state.iteration_data.changed_files = []
-            state.iteration_data.decision_outcome = "skipped_no_change"
-            state.current_phase = LoopPhase.LOG
-            logger.info("Implementation produced no file changes for iteration=%s", state.current_iteration)
-            return state
-        self._snapshot_experiment(root, artifacts, state)
-        out_of_scope = [path for path in changed_files if not scope.is_writable(path) and not scope.is_generated(path)]
-        if out_of_scope:
-            commit_hash = repo.commit(changed_files, "experiment: scope violation")
-            rollback_hash = revert_commit(repo, commit_hash)
+            if changed_files:
+                logger.info(
+                    "Resuming apply phase with %s existing changed file(s) for iteration=%s",
+                    len(changed_files),
+                    state.current_iteration,
+                )
+            else:
+                provider_config = config.provider.implementation
+                provider = self.provider_registry.get(provider_config.name)
+                response = provider.implement(
+                    ProviderRequest(
+                        project_root=root,
+                        provider_name=provider_config.name,
+                        model_name=provider_config.model,
+                        mode="implementation",
+                        prompt_text=build_implementation_prompt(scope, state.iteration_data.plan_text or "", state.current_iteration),
+                        writable_paths=scope.writable_patterns,
+                        generated_paths=scope.generated_patterns,
+                        non_interactive=provider_config.non_interactive,
+                        timeout_sec=provider_config.timeout_sec,
+                        iteration=state.current_iteration,
+                        metadata={"provider_config": provider_config},
+                    )
+                )
+                state.iteration_data.provider_output = (state.iteration_data.provider_output or "") + "\n\n" + response.raw_text
+                if response.exit_code != 0:
+                    state.iteration_data.notes = response.error or "provider implementation failed"
+                    state.iteration_data.decision_outcome = "skipped_provider_failure"
+                    state.current_phase = LoopPhase.LOG
+                    logger.warning("Implementation failed for iteration=%s: %s", state.current_iteration, state.iteration_data.notes)
+                    return state
+                changed_files = repo.working_tree_changed_files()
+            if not changed_files:
+                state.iteration_data.changed_files = []
+                state.iteration_data.decision_outcome = "skipped_no_change"
+                state.current_phase = LoopPhase.LOG
+                logger.info("Implementation produced no file changes for iteration=%s", state.current_iteration)
+                return state
+            self._snapshot_experiment(root, artifacts, state)
+            out_of_scope = [path for path in changed_files if not scope.is_writable(path) and not scope.is_generated(path)]
+            if out_of_scope:
+                commit_hash = repo.commit(changed_files, "experiment: scope violation")
+                rollback_hash = revert_commit(repo, commit_hash)
+                state.iteration_data.changed_files = changed_files
+                state.iteration_data.commit_hash = commit_hash
+                state.iteration_data.rollback_commit_hash = rollback_hash
+                state.iteration_data.notes = f"scope violation: {', '.join(out_of_scope)}"
+                state.iteration_data.decision_outcome = "reverted_scope_violation"
+                state.current_phase = LoopPhase.LOG
+                logger.warning("Scope violation for iteration=%s files=%s", state.current_iteration, ", ".join(out_of_scope))
+                return state
             state.iteration_data.changed_files = changed_files
-            state.iteration_data.commit_hash = commit_hash
-            state.iteration_data.rollback_commit_hash = rollback_hash
-            state.iteration_data.notes = f"scope violation: {', '.join(out_of_scope)}"
-            state.iteration_data.decision_outcome = "reverted_scope_violation"
-            state.current_phase = LoopPhase.LOG
-            logger.warning("Scope violation for iteration=%s files=%s", state.current_iteration, ", ".join(out_of_scope))
+            state.current_phase = LoopPhase.COMMIT
+            logger.info("Implementation changed %s file(s) for iteration=%s", len(changed_files), state.current_iteration)
             return state
-        state.iteration_data.changed_files = changed_files
-        state.current_phase = LoopPhase.COMMIT
-        logger.info("Implementation changed %s file(s) for iteration=%s", len(changed_files), state.current_iteration)
-        return state
 
     def _phase_commit(self, root: Path, repo: Repo, state: LoopState) -> LoopState:
-        parent_commit = repo.head()
-        commit_title = state.iteration_data.plan_title or f"iteration {state.current_iteration}"
-        commit_hash = repo.commit(state.iteration_data.changed_files, f"experiment: {commit_title}")
-        state.pending_commit = commit_hash
-        state.iteration_data.commit_hash = commit_hash
-        state.iteration_data.parent_commit_hash = parent_commit
-        state.iteration_data.changed_loc = repo.changed_loc_for_commit(commit_hash)
-        state.current_phase = LoopPhase.VERIFY
-        logger.info("Committed iteration=%s as %s", state.current_iteration, commit_hash)
-        return state
+        with self._debug_phase_method("_phase_commit", state):
+            parent_commit = repo.head()
+            commit_title = state.iteration_data.plan_title or f"iteration {state.current_iteration}"
+            commit_hash = repo.commit(state.iteration_data.changed_files, f"experiment: {commit_title}")
+            state.pending_commit = commit_hash
+            state.iteration_data.commit_hash = commit_hash
+            state.iteration_data.parent_commit_hash = parent_commit
+            state.iteration_data.changed_loc = repo.changed_loc_for_commit(commit_hash)
+            state.current_phase = LoopPhase.VERIFY
+            logger.info("Committed iteration=%s as %s", state.current_iteration, commit_hash)
+            return state
 
     def _phase_verify(
         self,
@@ -424,124 +429,155 @@ class LoopEngine:
         state: LoopState,
         stream_callback=None,
     ) -> LoopState:
-        run_dir = root / (state.iteration_data.run_dir or f"runs/{state.current_iteration:04d}")
-        verification = self.verifier.run(root, scope.manifest.verification.commands, run_dir, stream_callback=stream_callback)
-        artifacts.write_text(run_dir, "verifier.log", verification.combined_log)
-        state.iteration_data.verification_log = verification.combined_log
-        state.iteration_data.verification_exit_code = verification.exit_code
-        state.iteration_data.verification_command_names = [item.name for item in verification.command_results]
-        if verification.exit_code != 0:
-            state.iteration_data.decision_outcome = "skipped_verification_crash"
-            state.current_phase = LoopPhase.LOG
-            logger.warning("Verification failed for iteration=%s exit_code=%s", state.current_iteration, verification.exit_code)
+        with self._debug_phase_method("_phase_verify", state):
+            run_dir = root / (state.iteration_data.run_dir or f"runs/{state.current_iteration:04d}")
+            verification = self.verifier.run(root, scope.manifest.verification.commands, run_dir, stream_callback=stream_callback)
+            artifacts.write_text(run_dir, "verifier.log", verification.combined_log)
+            state.iteration_data.verification_log = verification.combined_log
+            state.iteration_data.verification_exit_code = verification.exit_code
+            state.iteration_data.verification_command_names = [item.name for item in verification.command_results]
+            if verification.exit_code != 0:
+                state.iteration_data.decision_outcome = "skipped_verification_crash"
+                state.current_phase = LoopPhase.LOG
+                logger.warning("Verification failed for iteration=%s exit_code=%s", state.current_iteration, verification.exit_code)
+                return state
+            metric = extract_metric(scope.manifest.metric, root, verification.command_results)
+            state.iteration_data.metric_value = metric.value
+            state.current_phase = LoopPhase.DECIDE
+            logger.info("Verification complete for iteration=%s metric=%s", state.current_iteration, metric.value)
             return state
-        metric = extract_metric(scope.manifest.metric, root, verification.command_results)
-        state.iteration_data.metric_value = metric.value
-        state.current_phase = LoopPhase.DECIDE
-        logger.info("Verification complete for iteration=%s metric=%s", state.current_iteration, metric.value)
-        return state
 
     def _phase_decide(self, root: Path, scope: ManifestScope, repo: Repo, state: LoopState) -> LoopState:
-        current_metric = state.iteration_data.metric_value
-        retained_metric = state.retained_metric
-        if current_metric is None:
-            state.iteration_data.decision_outcome = "skipped_verification_crash"
+        with self._debug_phase_method("_phase_decide", state):
+            current_metric = state.iteration_data.metric_value
+            retained_metric = state.retained_metric
+            if current_metric is None:
+                state.iteration_data.decision_outcome = "skipped_verification_crash"
+                state.current_phase = LoopPhase.LOG
+                return state
+            if not scope.manifest.metric or not scope.manifest.metric.extractor:
+                raise ProviderExecutionError("metric configuration missing")
+            thresholds_passed = thresholds_pass(scope.manifest.metric, current_metric)
+            if not thresholds_passed:
+                rollback_hash = revert_commit(repo, state.iteration_data.commit_hash or state.pending_commit or "")
+                state.iteration_data.rollback_commit_hash = rollback_hash
+                state.iteration_data.decision_outcome = "reverted_threshold_failure"
+                state.current_phase = LoopPhase.LOG
+                logger.info("Threshold check failed for iteration=%s metric=%s", state.current_iteration, current_metric)
+                return state
+            if retained_metric is None:
+                state.retained_metric = current_metric
+                state.retained_changed_loc = state.iteration_data.changed_loc
+                state.iteration_data.decision_outcome = "kept"
+                state.current_phase = LoopPhase.LOG
+                logger.info("Keeping first candidate for iteration=%s metric=%s", state.current_iteration, current_metric)
+                return state
+            decision = compare(retained_metric, current_metric, scope.manifest.metric.direction, scope.manifest.metric.epsilon)
+            if decision == "better":
+                state.retained_metric = current_metric
+                state.retained_changed_loc = state.iteration_data.changed_loc
+                state.iteration_data.decision_outcome = "kept"
+            elif decision == "equal" and tie_breaker_prefers_candidate(state.retained_changed_loc, state.iteration_data.changed_loc):
+                state.retained_metric = current_metric
+                state.retained_changed_loc = state.iteration_data.changed_loc
+                state.iteration_data.decision_outcome = "kept"
+            else:
+                rollback_hash = revert_commit(repo, state.iteration_data.commit_hash or state.pending_commit or "")
+                state.iteration_data.rollback_commit_hash = rollback_hash
+                state.iteration_data.decision_outcome = "reverted_worse_metric"
             state.current_phase = LoopPhase.LOG
+            logger.info(
+                "Decision complete for iteration=%s outcome=%s metric=%s retained_metric=%s",
+                state.current_iteration,
+                state.iteration_data.decision_outcome,
+                current_metric,
+                state.retained_metric,
+            )
             return state
-        if not scope.manifest.metric or not scope.manifest.metric.extractor:
-            raise ProviderExecutionError("metric configuration missing")
-        thresholds_passed = thresholds_pass(scope.manifest.metric, current_metric)
-        if not thresholds_passed:
-            rollback_hash = revert_commit(repo, state.iteration_data.commit_hash or state.pending_commit or "")
-            state.iteration_data.rollback_commit_hash = rollback_hash
-            state.iteration_data.decision_outcome = "reverted_threshold_failure"
-            state.current_phase = LoopPhase.LOG
-            logger.info("Threshold check failed for iteration=%s metric=%s", state.current_iteration, current_metric)
-            return state
-        if retained_metric is None:
-            state.retained_metric = current_metric
-            state.retained_changed_loc = state.iteration_data.changed_loc
-            state.iteration_data.decision_outcome = "kept"
-            state.current_phase = LoopPhase.LOG
-            logger.info("Keeping first candidate for iteration=%s metric=%s", state.current_iteration, current_metric)
-            return state
-        decision = compare(retained_metric, current_metric, scope.manifest.metric.direction, scope.manifest.metric.epsilon)
-        if decision == "better":
-            state.retained_metric = current_metric
-            state.retained_changed_loc = state.iteration_data.changed_loc
-            state.iteration_data.decision_outcome = "kept"
-        elif decision == "equal" and tie_breaker_prefers_candidate(state.retained_changed_loc, state.iteration_data.changed_loc):
-            state.retained_metric = current_metric
-            state.retained_changed_loc = state.iteration_data.changed_loc
-            state.iteration_data.decision_outcome = "kept"
-        else:
-            rollback_hash = revert_commit(repo, state.iteration_data.commit_hash or state.pending_commit or "")
-            state.iteration_data.rollback_commit_hash = rollback_hash
-            state.iteration_data.decision_outcome = "reverted_worse_metric"
-        state.current_phase = LoopPhase.LOG
-        logger.info(
-            "Decision complete for iteration=%s outcome=%s metric=%s retained_metric=%s",
-            state.current_iteration,
-            state.iteration_data.decision_outcome,
-            current_metric,
-            state.retained_metric,
-        )
-        return state
 
     def _phase_log(self, root: Path, scope: ManifestScope, artifacts: ArtifactStore, repo: Repo, state: LoopState) -> LoopState:
-        run_dir = root / (state.iteration_data.run_dir or f"runs/{state.current_iteration:04d}")
-        git_after_target = state.iteration_data.rollback_commit_hash or state.iteration_data.commit_hash or "HEAD"
-        git_after = repo.show(git_after_target)
-        artifacts.write_text(run_dir, "git_after.txt", git_after)
-        self._snapshot_experiment(root, artifacts, state, overwrite=False)
-        if state.iteration_data.provider_output is not None:
-            artifacts.write_text(run_dir, "provider_output.md", state.iteration_data.provider_output)
-        result_discussion = self._build_result_discussion(state)
-        artifacts.write_text(run_dir, "results_discussion.md", result_discussion)
-        if state.iteration_data.metric_value is not None:
-            artifacts.write_json(
-                run_dir,
-                "metrics.json",
-                {
-                    "name": scope.manifest.metric.name,
-                    "value": state.iteration_data.metric_value,
-                    "direction": scope.manifest.metric.direction,
-                },
+        with self._debug_phase_method("_phase_log", state):
+            run_dir = root / (state.iteration_data.run_dir or f"runs/{state.current_iteration:04d}")
+            git_after_target = state.iteration_data.rollback_commit_hash or state.iteration_data.commit_hash or "HEAD"
+            git_after = repo.show(git_after_target)
+            artifacts.write_text(run_dir, "git_after.txt", git_after)
+            self._snapshot_experiment(root, artifacts, state, overwrite=False)
+            if state.iteration_data.provider_output is not None:
+                artifacts.write_text(run_dir, "provider_output.md", state.iteration_data.provider_output)
+            result_discussion = self._build_result_discussion(state)
+            artifacts.write_text(run_dir, "results_discussion.md", result_discussion)
+            if state.iteration_data.metric_value is not None:
+                artifacts.write_json(
+                    run_dir,
+                    "metrics.json",
+                    {
+                        "name": scope.manifest.metric.name,
+                        "value": state.iteration_data.metric_value,
+                        "direction": scope.manifest.metric.direction,
+                    },
+                )
+            record = ResultRecord(
+                timestamp=_timestamp(),
+                iteration=state.current_iteration,
+                run_dir=run_dir.relative_to(root).as_posix(),
+                commit_hash=state.iteration_data.commit_hash,
+                parent_commit_hash=state.iteration_data.parent_commit_hash,
+                provider=state.provider,
+                model=state.model,
+                mode="implementation",
+                planned_files=state.iteration_data.planned_files,
+                changed_files=state.iteration_data.changed_files,
+                outcome=state.iteration_data.decision_outcome or "skipped_provider_failure",
+                verification_exit_code=state.iteration_data.verification_exit_code or 0,
+                verification_command_names=state.iteration_data.verification_command_names,
+                repair_attempted=state.iteration_data.repair_attempted,
+                rollback_commit_hash=state.iteration_data.rollback_commit_hash,
+                notes=state.iteration_data.notes,
+                result_discussion="results_discussion.md",
+                hypothesis_summary=self._build_hypothesis_summary(state),
+                metric_value=state.iteration_data.metric_value,
+                changed_loc=state.iteration_data.changed_loc,
             )
-        record = ResultRecord(
-            timestamp=_timestamp(),
-            iteration=state.current_iteration,
-            run_dir=run_dir.relative_to(root).as_posix(),
-            commit_hash=state.iteration_data.commit_hash,
-            parent_commit_hash=state.iteration_data.parent_commit_hash,
-            provider=state.provider,
-            model=state.model,
-            mode="implementation",
-            planned_files=state.iteration_data.planned_files,
-            changed_files=state.iteration_data.changed_files,
-            outcome=state.iteration_data.decision_outcome or "skipped_provider_failure",
-            verification_exit_code=state.iteration_data.verification_exit_code or 0,
-            verification_command_names=state.iteration_data.verification_command_names,
-            repair_attempted=state.iteration_data.repair_attempted,
-            rollback_commit_hash=state.iteration_data.rollback_commit_hash,
-            notes=state.iteration_data.notes,
-            result_discussion="results_discussion.md",
-            hypothesis_summary=self._build_hypothesis_summary(state),
-            metric_value=state.iteration_data.metric_value,
-            changed_loc=state.iteration_data.changed_loc,
+            artifacts.write_json(run_dir, "result.json", record.model_dump(mode="python"))
+            artifacts.append_result(record.model_dump(mode="python"))
+            artifacts.refresh_latest_history()
+            state.last_outcome = record.outcome
+            state.pending_commit = None
+            state.rollback_state = "needed" if state.iteration_data.rollback_commit_hash else "not_needed"
+            state.current_iteration += 1
+            state.current_phase = LoopPhase.READ_CONTEXT
+            state.iteration_data = IterationPayload()
+            state.status = LoopStatus.PAUSED
+            logger.info("Recorded result for iteration=%s outcome=%s", record.iteration, record.outcome)
+            return state
+
+    @contextmanager
+    def _debug_phase_method(self, method_name: str, state: LoopState):
+        logger.debug(
+            "Enter phase method=%s iteration=%s phase=%s",
+            method_name,
+            state.current_iteration,
+            state.current_phase.value,
         )
-        artifacts.write_json(run_dir, "result.json", record.model_dump(mode="python"))
-        artifacts.append_result(record.model_dump(mode="python"))
-        artifacts.refresh_latest_history()
-        state.last_outcome = record.outcome
-        state.pending_commit = None
-        state.rollback_state = "needed" if state.iteration_data.rollback_commit_hash else "not_needed"
-        state.current_iteration += 1
-        state.current_phase = LoopPhase.READ_CONTEXT
-        state.iteration_data = IterationPayload()
-        state.status = LoopStatus.PAUSED
-        logger.info("Recorded result for iteration=%s outcome=%s", record.iteration, record.outcome)
-        return state
+        try:
+            yield
+        except Exception:
+            logger.debug(
+                "Exit phase method=%s iteration=%s phase=%s outcome=%s error=true",
+                method_name,
+                state.current_iteration,
+                state.current_phase.value,
+                state.iteration_data.decision_outcome,
+                exc_info=True,
+            )
+            raise
+        logger.debug(
+            "Exit phase method=%s iteration=%s phase=%s outcome=%s error=false",
+            method_name,
+            state.current_iteration,
+            state.current_phase.value,
+            state.iteration_data.decision_outcome,
+        )
 
     def _build_result_discussion(self, state: LoopState) -> str:
         return (

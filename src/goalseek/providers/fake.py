@@ -9,6 +9,7 @@ import yaml
 
 from goalseek.models.config import ProviderSelection
 from goalseek.providers.base import ProviderCapabilities, ProviderRequest, ProviderResponse
+from goalseek.utils.file_logging import log_if_creating_file
 
 
 logger = logging.getLogger(__name__)
@@ -110,6 +111,7 @@ class FakeProvider:
         if kind == "write_file":
             target = project_root / action["path"]
             target.parent.mkdir(parents=True, exist_ok=True)
+            log_if_creating_file(target, "write_file")
             target.write_text(action.get("content", ""), encoding="utf-8")
             return [target.relative_to(project_root).as_posix()]
         if kind == "append_text":

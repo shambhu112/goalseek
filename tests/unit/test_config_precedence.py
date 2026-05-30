@@ -85,6 +85,7 @@ provider:
   hypothesis:
     name: codex
     model: gpt-5-codex
+    model_catalog_json: hidden/models-with-iris-alpha.json
     transport: sdk
     reuse_thread: true
     reasoning_effort: high
@@ -123,6 +124,7 @@ provider:
     config = ProjectService().load_effective_config(project_root)
 
     assert config.provider.hypothesis.transport == "sdk"
+    assert config.provider.hypothesis.model_catalog_json == "hidden/models-with-iris-alpha.json"
     assert config.provider.hypothesis.parallel_runs.enabled is True
     assert config.provider.hypothesis.parallel_runs.candidates == 3
     assert config.provider.hypothesis.deep_research.model == "o4-mini-deep-research"

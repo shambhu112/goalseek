@@ -18,7 +18,7 @@ class StateStore:
         return LoopState.model_validate(data)
 
     def save(self, state: LoopState) -> LoopState:
-        dump_json_atomic(self.path, state.model_dump(mode="python"))
+        dump_json_atomic(self.path, state.model_dump(mode="python"), method_name="save")
         return state
 
     def initialize(

@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from goalseek.api import run_baseline, run_step
 from goalseek.errors import ProjectStateError
+from goalseek.gitops.repo import Repo
 from tests.helpers import write_fake_provider, write_fake_provider_data
 
 def test_step_engine_advances_one_phase_at_a_time(project_factory):
@@ -149,3 +152,41 @@ def test_step_engine_phase_is_string_type(project_factory):
     phase = result.get("current_phase")
     assert isinstance(phase, str), f"Expected phase to be str, got {type(phase).__name__}: {phase}"
     assert phase is not None, "Phase should not be None"
+
+
+def test_step_engine_logs_phase_method_entry_and_exit(project_factory):
+    project_root = project_factory("phase-debug-logs")
+    write_fake_provider(project_root, "fake_provider_single_improve.yaml")
+    log_path = project_root.parent / "phase-debug.log"
+
+    project_config = project_root / "config" / "project.yaml"
+    project_config.write_text(
+        project_config.read_text(encoding="utf-8")
+        + f"""
+logging:
+  enabled: true
+  level: DEBUG
+  handlers:
+    - type: file
+      path: {log_path}
+""",
+        encoding="utf-8",
+    )
+    Repo(project_root).commit(["config/project.yaml"], "test: enable debug file logging")
+
+    run_baseline(str(project_root))
+    for _ in range(7):
+        run_step(str(project_root))
+
+    log_text = Path(log_path).read_text(encoding="utf-8")
+    for method_name in (
+        "_phase_read_context",
+        "_phase_plan",
+        "_phase_apply",
+        "_phase_commit",
+        "_phase_verify",
+        "_phase_decide",
+        "_phase_log",
+    ):
+        assert f"Enter phase method={method_name}" in log_text
+        assert f"Exit phase method={method_name}" in log_text
